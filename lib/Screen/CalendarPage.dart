@@ -4,6 +4,7 @@ import 'package:dip_taskplanner/components/regExp.dart';
 import 'package:dip_taskplanner/database/database_hepler.dart';
 import 'package:dip_taskplanner/database/model/course.dart';
 import 'package:dip_taskplanner/database/model/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui';
 import 'package:dip_taskplanner/constants.dart';
@@ -15,6 +16,7 @@ import 'package:pdf_render/pdf_render.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:dip_taskplanner/Screen/camera.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 
@@ -23,27 +25,6 @@ class CalendarPage extends StatefulWidget {
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
-}
-
-//close Camscanner and go back to calendar
-class openCalendar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Camera Scanner"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );
-  }
 }
 
 class _CalendarPageState extends State<CalendarPage> {
@@ -379,12 +360,14 @@ class _CalendarPageState extends State<CalendarPage> {
                                 ),
                               ),
                               Expanded(
-                                child: FlatButton(
-                                  onPressed: () {
-                                    Navigator.push(context,MaterialPageRoute(builder: (context) => openCalendar()),);
-                                  },
-                                  child: Icon(
-                                    Icons.add_a_photo, size: 30.0,
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: IconButton(
+                                    icon: Icon(Icons.add_a_photo),
+                                    color: Colors.white,
+                                    alignment: Alignment.centerRight,
+                                    onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => openCalendar()),);
+                                    },
                                   ),
                                 ),
                               ),
