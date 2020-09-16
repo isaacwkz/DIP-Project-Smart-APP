@@ -25,6 +25,27 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
+//close Camscanner and go back to calendar
+class openCalendar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Camera Scanner"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped.
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
 class _CalendarPageState extends State<CalendarPage> {
   final _scaffoldKey = GlobalKey<
       ScaffoldState>(); //To allow top left table icon button to open scaffold drawer
@@ -351,9 +372,19 @@ class _CalendarPageState extends State<CalendarPage> {
                                   height: 150.0,
                                   child: Center(
                                     child: Text(
-                                      '${DateFormat.yMMMM().format(dateTime)}',
+                                      '${DateFormat.MMMM().format(dateTime)}',
                                       style: TextStyle(fontSize: 40.0),
                                     ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: FlatButton(
+                                  onPressed: () {
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => openCalendar()),);
+                                  },
+                                  child: Icon(
+                                    Icons.add_a_photo, size: 30.0,
                                   ),
                                 ),
                               ),
