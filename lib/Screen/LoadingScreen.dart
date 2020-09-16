@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/CalendarPage.dart';
 import 'package:dip_taskplanner/components/regExp.dart';
+import 'package:dip_taskplanner/Screen/browser.dart';
+
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   var datebasehelper = DatabaseHelper();
   String state = 'Loading Files';
   bool exist = false;
+  final dateController = TextEditingController();
   final myTextController = TextEditingController();
   @override
   void initState() {
@@ -31,6 +34,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return getOption();
   }
+
   Widget getOption (){
     switch (state) {
       case '1': return CalendarPage();
@@ -48,8 +52,31 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical:0.0, horizontal: 20.0),
-                  child: TextField(controller: myTextController,decoration: InputDecoration(hintText: 'Paste here',labelText:'Print/Check Courses Registered' ) ,),
+                  child: TextField(controller: dateController,decoration: InputDecoration(hintText: 'Type here (DDMMYYYY)',labelText:'Input Semester Starting Date' ) ,),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical:0.0, horizontal: 20.0),
+                  child: TextField(controller: myTextController,decoration: InputDecoration(hintText: 'Paste your course here',labelText:'Print/Check Courses Registered' ) ,),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(left:0.0),
+                    child: new RaisedButton(
+                        child: Text(
+                          "Check Your Course Registed",
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                        color: Color(0x1F415D),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(new MaterialPageRoute(builder: (_) {
+                            return new Browser(
+                              url: "https://sso.wis.ntu.edu.sg/webexe88/owa/sso_redirect.asp?t=1&app=https://wish.wis.ntu.edu.sg/pls/webexe/aus_stars_check.check_subject_web2",
+                              title: "Course Registration",
+                            );
+                          }));
+                        })
+                ),
+
                 Row(
                   
                   children: [
@@ -109,10 +136,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 ),
 
               ],
+
             )
-            
-          
-            
+
           ),
         ),
     ),
@@ -130,5 +156,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
       );break;
     }
   }
-}
+
+  }
+
+
+
+
+
+
+
 
