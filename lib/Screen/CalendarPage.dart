@@ -17,6 +17,7 @@ import 'package:date_utils/date_utils.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
+import 'package:dip_taskplanner/Screen/gallery.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 
@@ -299,6 +300,16 @@ class _CalendarPageState extends State<CalendarPage> {
                                 ],
                               ),
                             );
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.collections),
+                          title: Text('Gallery'),
+                          onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Gallery()),
+                                );
                           },
                         ),
                         ListTile(
