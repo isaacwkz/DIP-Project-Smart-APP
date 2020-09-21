@@ -199,8 +199,9 @@ class _CameraScreenState extends State<CameraPageEntry> {
               alignment: Alignment.center,
               child: cameraPreview(),
             ),
-            Expanded(
+            Align(
               //flex: 1,
+              alignment: Alignment.topLeft,
               child: Padding(
                 padding: EdgeInsets.only(top: 32.0, left: 5.0),
                 child: BackButton(),
