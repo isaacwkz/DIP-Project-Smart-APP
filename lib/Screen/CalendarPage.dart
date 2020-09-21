@@ -376,7 +376,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                     color: Colors.white,
                                     alignment: Alignment.centerRight,
                                     onPressed: () {
-                                      Navigator.push(context,MaterialPageRoute(builder: (context) => openCamera()),);
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => CameraPageEntry()),);
                                     },
                                   ),
                                 ),

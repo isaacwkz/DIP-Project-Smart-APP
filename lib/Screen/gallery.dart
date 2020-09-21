@@ -85,7 +85,7 @@ class _GalleryState extends State<GalleryPageEntry> {
       ),
       body: const Center(
         child: Text(
-          'This is the next page',
+          'TODO: Make the gallery',
           style: TextStyle(fontSize: 24),
         ),
       ),
@@ -93,10 +93,10 @@ class _GalleryState extends State<GalleryPageEntry> {
         onPressed: () {
           // Add your onPressed code here!
           Navigator.pop(context);
-          Navigator.push(context,MaterialPageRoute(builder: (context) => openCamera()),);
+          Navigator.push(context,MaterialPageRoute(builder: (context) => CameraPageEntry()),);
         },
         child: Icon(Icons.add_a_photo),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       )
     );
 

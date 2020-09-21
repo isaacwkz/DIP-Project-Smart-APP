@@ -12,27 +12,12 @@ import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:dip_taskplanner/Screen/gallery.dart';
 
 //Entry point into Camera
-class openCamera extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Rubik',
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: CameraScreen(),
-    );
-
-  }
-}
-
-class CameraScreen extends StatefulWidget {
+class CameraPageEntry extends StatefulWidget {
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _CameraScreenState extends State<CameraPageEntry> {
   CameraController cameraController;
   List cameras;
   int selectedCameraIndex;
@@ -91,7 +76,7 @@ class _CameraScreenState extends State<CameraScreen> {
         alignment: Alignment.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
 
             FloatingActionButton(
@@ -106,24 +91,36 @@ class _CameraScreenState extends State<CameraScreen> {
               },
             ),
 
-            FloatingActionButton(
-              heroTag: "Gallery",
-              child: Icon(
-                Icons.collections,
-                color: Colors.black,
-              ),
-              backgroundColor: Colors.white,
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
-              },
-            )
           ],
         ),
       ),
     );
   }
-
+  Widget GalleryWidget(context) {
+    return Expanded(
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FloatingActionButton(
+                heroTag: "Gallery",
+                child: Icon(
+                  Icons.collections,
+                  color: Colors.black,
+                ),
+                backgroundColor: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                },
+              )
+              ],
+          ),
+        ),
+    );
+  }
   Widget cameraToggle() {
     if (cameras == null || cameras.isEmpty) {
       return Spacer();
@@ -198,13 +195,16 @@ class _CameraScreenState extends State<CameraScreen> {
       body: Container(
         child: Stack(
           children: <Widget>[
-//            Expanded(
-//              flex: 1,
-//              child: _cameraPreviewWidget(),
-//            ),
             Align(
               alignment: Alignment.center,
               child: cameraPreview(),
+            ),
+            Expanded(
+              //flex: 1,
+              child: Padding(
+                padding: EdgeInsets.only(top: 32.0, left: 5.0),
+                child: BackButton(),
+                ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -218,7 +218,8 @@ class _CameraScreenState extends State<CameraScreen> {
                   children: <Widget>[
                     cameraToggle(),
                     cameraControl(context),
-                    Spacer(),
+                    //Spacer(),
+                    GalleryWidget(context),
                   ],
                 ),
               ),
