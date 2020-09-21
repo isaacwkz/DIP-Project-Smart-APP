@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 
-//close Camscanner and go back to calendar
+//Entry point into Camera
 class openCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

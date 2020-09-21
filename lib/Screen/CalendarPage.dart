@@ -310,6 +310,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                   context,
                                   MaterialPageRoute(builder: (context) => Gallery()),
                                 );
+
                           },
                         ),
                         ListTile(
