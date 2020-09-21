@@ -302,15 +302,12 @@ class _CalendarPageState extends State<CalendarPage> {
                             );
                           },
                         ),
-                        ListTile(
+                        ListTile( // Button to enter the gallery screen
                           leading: Icon(Icons.collections),
                           title: Text('Gallery'),
                           onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => Gallery()),
-                                );
-
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
                           },
                         ),
                         ListTile(
@@ -371,14 +368,15 @@ class _CalendarPageState extends State<CalendarPage> {
                                   ),
                                 ),
                               ),
-                              Expanded(
+                              Expanded( // Button to enter Camera screen
                                 child: Padding(
                                   padding: EdgeInsets.all(16.0),
                                   child: IconButton(
                                     icon: Icon(Icons.add_a_photo),
                                     color: Colors.white,
                                     alignment: Alignment.centerRight,
-                                    onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context) => openCalendar()),);
+                                    onPressed: () {
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => openCamera()),);
                                     },
                                   ),
                                 ),

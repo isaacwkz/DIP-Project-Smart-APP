@@ -9,29 +9,13 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:dip_taskplanner/Screen/gallery.dart';
 
 //Entry point into Camera
-class openCalendar extends StatelessWidget {
+class openCamera extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*return Scaffold(
-      appBar: AppBar(
-        title: Text("Camera Scanner"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
-    );*/
-
     return MaterialApp(
-      title: 'Uree',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Rubik',
         primarySwatch: Colors.deepPurple,
@@ -109,7 +93,9 @@ class _CameraScreenState extends State<CameraScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
+
             FloatingActionButton(
+              heroTag: "Capture",
               child: Icon(
                 Icons.camera,
                 color: Colors.black,
@@ -117,6 +103,19 @@ class _CameraScreenState extends State<CameraScreen> {
               backgroundColor: Colors.white,
               onPressed: () {
                 onCapture(context);
+              },
+            ),
+
+            FloatingActionButton(
+              heroTag: "Gallery",
+              child: Icon(
+                Icons.collections,
+                color: Colors.black,
+              ),
+              backgroundColor: Colors.white,
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
               },
             )
           ],
