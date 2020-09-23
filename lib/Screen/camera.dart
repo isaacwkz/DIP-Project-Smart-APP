@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:dip_taskplanner/Screen/gallery.dart';
+import 'package:dip_taskplanner/Screen/cropping.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -155,10 +156,10 @@ class _CameraScreenState extends State<CameraPageEntry> {
   onCapture(context) async {
     try {
       print("get temporary diretory");
-      final p = await getTemporaryDirectory();
+      final p = await getExternalStorageDirectory();
       print(p);
-      //final name = DateTime.now();
-      final name = "TestTest";
+      final name = DateTime.now();
+      //final name = "TestTest";
       final path = "${p.path}/$name.png";
       //final path = "${p.path}/TestTest.png";
       print("full file path:");
@@ -313,6 +314,18 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           },
                         ),
                       ),
+                      Expanded(
+                        child: FloatingActionButton(
+                        heroTag: "Crop",
+                        child: Icon(Icons.crop,color: Colors.black,),
+                        backgroundColor: Colors.white,
+                        onPressed: (){
+
+                          },
+                        ),
+                      ),
+
+
 
                       //Go to gallery
                       Expanded(
