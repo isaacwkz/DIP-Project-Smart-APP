@@ -87,6 +87,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
               ),
               backgroundColor: Colors.white,
               onPressed: () {
+                print("shutter!");
                 onCapture(context);
               },
             ),
@@ -141,6 +142,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
               color: Colors.white,
               size: 24,
             ),
+            shape: RoundedRectangleBorder(),
             label: Text(
               '${lensDirection.toString().substring(lensDirection.toString().indexOf('.') + 1).toUpperCase()}',
               style:
@@ -152,14 +154,21 @@ class _CameraScreenState extends State<CameraPageEntry> {
 
   onCapture(context) async {
     try {
+      print("get temporary diretory");
       final p = await getTemporaryDirectory();
-      final name = DateTime.now();
+      print(p);
+      //final name = DateTime.now();
+      final name = "TestTest";
       final path = "${p.path}/$name.png";
+      //final path = "${p.path}/TestTest.png";
+      print("full file path:");
+      print(path);
 
       await cameraController.takePicture(path).then((value) {
-        print('here');
+        print('Saving Photo to');
         print(path);
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$name.png",)));
+        //Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$name.png",)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "TestTest.png",)));
       });
 
     } catch (e) {
@@ -286,18 +295,43 @@ class _PreviewScreenState extends State<PreviewScreen> {
                   width: double.infinity,
                   height: 60,
                   color: Colors.black,
-                  child: Center(
-                    child: IconButton(
-                      icon: Icon(Icons.share,color: Colors.white,),
-                      onPressed: (){
-                        getBytes().then((bytes) {
-                          print('here now');
-                          print(widget.imgPath);
-                          print(bytes.buffer.asUint8List());
-                          Share.file('Share via', widget.fileName, bytes.buffer.asUint8List(), 'image/path');
-                        });
-                      },
-                    ),
+                  child: Row(
+                    children: <Widget>[
+                      //Share Photo
+                      Expanded(
+                        child: FloatingActionButton(
+                          heroTag: "Share",
+                          child: Icon(Icons.share,color: Colors.black,),
+                          backgroundColor: Colors.white,
+                          onPressed: (){
+                            getBytes().then((bytes) {
+                              print("Share button pressed");
+                              print(widget.imgPath);
+                              print(bytes.buffer.asUint8List());
+                              Share.file('Share via', widget.fileName, bytes.buffer.asUint8List(), 'image/path');
+                            });
+                          },
+                        ),
+                      ),
+
+                      //Go to gallery
+                      Expanded(
+                        child: FloatingActionButton(
+                          heroTag: "Gallery",
+                          child: Icon(
+                            Icons.collections,
+                            color: Colors.black,
+                          ),
+                          backgroundColor: Colors.white,
+                          onPressed: () {
+                            //pops stack, remove photo preview from stack
+                            //not that pressing back from next route goes back to camera
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                          },
+                        )
+                      ),
+                    ],
                   ),
                 ),
               )
