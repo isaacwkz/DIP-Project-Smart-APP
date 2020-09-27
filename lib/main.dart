@@ -1,5 +1,8 @@
 import 'package:dip_taskplanner/Screen/LoadingScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:dip_taskplanner/Screen/calendar.dart';
+import 'package:dip_taskplanner/Screen/homePage.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,7 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: LoadingScreen()
+      home: HomePage(),
+      //home: calendar(),
     );
   }
 }
