@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/CalendarPage.dart';
 import 'package:dip_taskplanner/components/regExp.dart';
 import 'package:dip_taskplanner/Screen/browser.dart';
+import 'package:dip_taskplanner/Screen/calendar.dart';
 
 
 class LoadingScreen extends StatefulWidget {
@@ -37,7 +38,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   Widget getOption (){
     switch (state) {
-      case '1': return CalendarPage();
+      //case '1': return CalendarPage();
+      case '1': return  MyHomePage();
       case '2': return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -91,7 +93,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return CalendarPage();
+                                  return   MyHomePage();
                                 },
                               ),
                             );

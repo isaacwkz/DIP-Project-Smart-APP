@@ -49,6 +49,11 @@ flutter:
   uses-material-design: true
   assets:
     - lib/Assets/
+    - lib/Assets/ntu.png
+    - lib/Assets/Sample.jpeg
+    - lib/Assets/file.jpg
+    - lib/Assets/calendar.png
+    - lib/Assets/study.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
