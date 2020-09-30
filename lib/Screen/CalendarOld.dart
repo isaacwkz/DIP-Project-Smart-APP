@@ -4,6 +4,7 @@ import 'package:dip_taskplanner/components/regExp.dart';
 import 'package:dip_taskplanner/database/database_hepler.dart';
 import 'package:dip_taskplanner/database/model/course.dart';
 import 'package:dip_taskplanner/database/model/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui';
 import 'package:dip_taskplanner/components/constants.dart';
@@ -15,6 +16,8 @@ import 'package:pdf_render/pdf_render.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:dip_taskplanner/Screen/camera.dart';
+import 'package:dip_taskplanner/Screen/gallery.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 
@@ -299,6 +302,14 @@ class _CalendarPageState extends State<CalendarPage> {
                             );
                           },
                         ),
+                        ListTile( // Button to enter the gallery screen
+                          leading: Icon(Icons.collections),
+                          title: Text('Gallery'),
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                          },
+                        ),
                         ListTile(
                           leading: Icon(Icons.settings),
                           title: Text('About'),
@@ -351,9 +362,22 @@ class _CalendarPageState extends State<CalendarPage> {
                                   height: 150.0,
                                   child: Center(
                                     child: Text(
-                                      '${DateFormat.yMMMM().format(dateTime)}',
+                                      '${DateFormat.MMMM().format(dateTime)}',
                                       style: TextStyle(fontSize: 40.0),
                                     ),
+                                  ),
+                                ),
+                              ),
+                              Expanded( // Button to enter Camera screen
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: IconButton(
+                                    icon: Icon(Icons.add_a_photo),
+                                    color: Colors.white,
+                                    alignment: Alignment.centerRight,
+                                    onPressed: () {
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => CameraPageEntry()),);
+                                    },
                                   ),
                                 ),
                               ),
