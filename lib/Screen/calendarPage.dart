@@ -2,47 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:dip_taskplanner/add_user_dialog.dart';
-import 'package:dip_taskplanner/homescreen.dart';
-import 'package:dip_taskplanner/home_presenter.dart';
-import 'package:dip_taskplanner/Screen/LoadingScreen.dart';
+import 'package:dip_taskplanner/components/add_user_dialog.dart';
+import 'package:dip_taskplanner/components/homescreen.dart';
+import 'package:dip_taskplanner/components/home_presenter.dart';
+import 'package:dip_taskplanner/Screen/loadingPage.dart';
 
 
-// Example holidays
-final Map<DateTime, List> _holidays = {
-  DateTime(2019, 1, 1): ['New Year\'s Day'],
-};
 
-void main() {
-  initializeDateFormatting().then((_) => runApp(MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Table Calendar Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  //MyHomePage({Key key, this.title}) : super(key: key);
-  //MyHomePage();
-  //calendar();
-  //final String title;
+class calendar extends StatefulWidget {
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _calendarState createState() => _calendarState();
 }
 
 
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _calendarState extends State<calendar> with TickerProviderStateMixin {
   //Vairable Initializaton
   Map<DateTime, List> _events;
   List _selectedEvents;
@@ -107,10 +82,11 @@ void _onDaySelected(DateTime day, List events) {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      //backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: Text('TEST'),
-        //title: Text('TEST'),
+        title: Text('Calendar'),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
@@ -133,16 +109,15 @@ void _onDaySelected(DateTime day, List events) {
     return TableCalendar(
       calendarController: _calendarController,
       events: _events,
-      holidays: _holidays,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
         selectedColor: Colors.deepOrange[400],
         todayColor: Colors.deepOrange[200],
-        markersColor: Colors.brown[700],
+        markersColor: Colors.amber[700],
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
-        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0, fontWeight: FontWeight.bold),
         formatButtonDecoration: BoxDecoration(
           color: Colors.deepOrange[400],
           borderRadius: BorderRadius.circular(16.0),
@@ -160,7 +135,6 @@ void _onDaySelected(DateTime day, List events) {
       locale: 'pl_PL',
       calendarController: _calendarController,
       events: _events,
-      holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -224,16 +198,6 @@ void _onDaySelected(DateTime day, List events) {
             );
           }
 
-          if (holidays.isNotEmpty) {
-            children.add(
-              Positioned(
-                right: -2,
-                top: -2,
-                child: _buildHolidaysMarker(),
-              ),
-            );
-          }
-
           return children;
         },
       ),
@@ -269,13 +233,6 @@ void _onDaySelected(DateTime day, List events) {
     );
   }
 
-  Widget _buildHolidaysMarker() {
-    return Icon(
-      Icons.add_box,
-      size: 20.0,
-      color: Colors.blueGrey[800],
-    );
-  }
 
   Widget _buildButtons() {
     final dateTime = _events.keys.elementAt(_events.length - 2);
@@ -288,15 +245,17 @@ void _onDaySelected(DateTime day, List events) {
           children: <Widget>[
             RaisedButton(
               child: Text('Load Course'),
+              color: Color(0xFFA500),
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoadingScreen()),
+                    MaterialPageRoute(builder: (context) => LoadingPage()),
                 );
               }
             ),
             RaisedButton(
               child: Text('Course Schedule'),
+              color: Color(0xFFA500),
               onPressed: () {
                 setState(() {
                   _calendarController.setCalendarFormat(CalendarFormat.week);
@@ -305,7 +264,8 @@ void _onDaySelected(DateTime day, List events) {
             ),
             RaisedButton(
               child: Text('Add New Events'),
-                  onPressed:() => _todoEdit(),
+              color: Color(0xFFA500),
+              onPressed:() => _todoEdit(),
             ),
 
           ],

@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dip_taskplanner/Screen/CalendarPage.dart';
+import 'package:dip_taskplanner/Screen/CalendarOld.dart';
 import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/add_user_dialog.dart';
+import 'package:dip_taskplanner/components/add_user_dialog.dart';
 import 'package:dip_taskplanner/database/model/user.dart';
-import 'package:dip_taskplanner/home_presenter.dart';
-import 'package:dip_taskplanner/list.dart';
+import 'package:dip_taskplanner/components/home_presenter.dart';
+import 'package:dip_taskplanner/components/list.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title,this.dateTime}) : super(key: key);

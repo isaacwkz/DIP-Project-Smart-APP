@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dip_taskplanner/components/regExp.dart';
 import 'package:intl/intl.dart';
-import 'package:dip_taskplanner/homescreen.dart';
+import 'package:dip_taskplanner/components/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/database/database_hepler.dart';
 import 'package:dip_taskplanner/database/model/user.dart';

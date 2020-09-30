@@ -6,8 +6,8 @@ import 'package:dip_taskplanner/database/model/course.dart';
 import 'package:dip_taskplanner/database/model/user.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui';
-import 'package:dip_taskplanner/constants.dart';
-import 'package:dip_taskplanner/Screen/LoadingScreen.dart';
+import 'package:dip_taskplanner/components/constants.dart';
+import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/components/Reuseable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -284,7 +284,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LoadingScreen()));
+                                                  LoadingPage()));
                                     },
                                     child: Text('Yes'),
                                   ),

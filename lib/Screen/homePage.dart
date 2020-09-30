@@ -1,13 +1,18 @@
-import 'package:dip_taskplanner/Screen/LoadingScreen.dart';
-import 'package:dip_taskplanner/quad_clipper.dart';
+import 'package:dip_taskplanner/Screen/CalendarOld.dart';
+import 'package:dip_taskplanner/Screen/loadingPage.dart';
+import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
 import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/Screen/calendar.dart';
+import 'package:dip_taskplanner/Screen/calendarPage.dart';
 
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
 //This page is homepage
-class HomePage extends StatelessWidget {
-  HomePage({Key key}) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  //HomePage({Key key}) : super(key: key);
 
   double width;
 
@@ -20,7 +25,7 @@ class HomePage extends StatelessWidget {
       borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
       child: Container(
-          height: 200,
+          height: 160,
           width: width,
           decoration: BoxDecoration(
             color: LightColor.purple,
@@ -51,11 +56,6 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Icon(
-                            Icons.keyboard_arrow_left,
-                            color: Colors.white,
-                            size: 40,
-                          ),
                           SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,36 +131,36 @@ class HomePage extends StatelessWidget {
               backWidget:
               _decorationContainerA(LightColor.lightOrange, 50, -30),
               chipColor: LightColor.orange,
-              chipText1: "Find the right degree for you",
+              chipText1: "This application helps you have better time management",
               chipText2: "HOME PAGE",
               isPrimaryCard: true,
               imgPath: 'lib/Assets/ntu.png',
             ),
             _card(
               primary: Colors.white,
-              chipColor: LightColor.seeBlue,
+              chipColor: LightColor.darkBlue,
               backWidget: _decorationContainerB(Colors.white, 90, -40),
-              chipText1: "Become a data scientist",
-              chipText2: "CALENDAR PAGE",
+              chipText1: "Load your course timetable to calendar",
+              chipText2: "CALENDAR",
               imgPath: 'lib/Assets/calendar.png',
             ),
             _card(
                 primary: Colors.white,
                 chipColor: LightColor.lightOrange,
                 backWidget: _decorationContainerC(Colors.white, 50, -30),
-                chipText1: "Become a digital marketer",
+                chipText1: "Store and sorting your course material",
                 chipText2: "FILE SORTING",
-                imgPath:'lib/Assets/study.png',
+                imgPath:'lib/Assets/file.jpg',
                 ),
             _card(
                 primary: Colors.white,
-                chipColor: LightColor.seeBlue,
+                chipColor: LightColor.darkBlue,
                 backWidget: _decorationContainerD(LightColor.seeBlue, -50, 30,
                     secondary: LightColor.lightseeBlue,
                     secondaryAccent: LightColor.darkseeBlue),
-                chipText1: "Become a machine learner",
+                chipText1: "Study mode helps you focus",
                 chipText2: "STUDY MODE",
-                imgPath: 'lib/Assets/file.jpg',
+                imgPath: 'lib/Assets/study.png',
               ),
           ],
         ),
@@ -171,6 +171,7 @@ class HomePage extends StatelessWidget {
   Color buttonColor1 = LightColor.orange;
   Color buttonColor2 = LightColor.seeBlue;
   Color buttonColor3 = LightColor.yellow;
+  Color buttonColor4 = LightColor.lightpurple;
   Widget _buildButtons(BuildContext context) {
 
     return Column(
@@ -210,7 +211,11 @@ class HomePage extends StatelessWidget {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () => {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => CalendarPage()),);
+                              print("Loading page");
+                            },
                           ),
                         ),
                       )
@@ -219,7 +224,8 @@ class HomePage extends StatelessWidget {
                   //onPressed: () => {},
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => LoadingScreen()),);
+                        builder: (context) => LoadingPage()),);
+                    print("Loading page");
                   },
                 ),
               ),
@@ -269,10 +275,10 @@ class HomePage extends StatelessWidget {
                   ),
                   //onPressed: () => {},
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),);
+                    Navigator.pushNamed(context, "calendar");
+                    print('test');
                   },
+
                 ),
               ),
             ],
@@ -289,6 +295,53 @@ class HomePage extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(30.0)),
                   splashColor: buttonColor3,
                   color: buttonColor3,
+                  child: new Row(
+                    children: <Widget>[
+                      new Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Sorting your course file here",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      new Expanded(
+                        child: Container(),
+                      ),
+                      new Transform.translate(
+                        offset: Offset(15.0, 0.0),
+                        child: new Container(
+                          padding: const EdgeInsets.all(5.0),
+                          child: FlatButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius:
+                                new BorderRadius.circular(28.0)),
+                            splashColor: Colors.white,
+                            child: Icon(
+                              Icons.arrow_forward,
+                            ),
+                            onPressed: () => {},
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  onPressed: () => {},
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          child: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: FlatButton(
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
+                  splashColor: buttonColor4,
+                  color: buttonColor4,
                   child: new Row(
                     children: <Widget>[
                       new Padding(
@@ -319,12 +372,7 @@ class HomePage extends StatelessWidget {
                       )
                     ],
                   ),
-                  //onPressed: () => {},
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MyHomePage()),);
-                  },
+                  onPressed: () => {},
                 ),
               ),
             ],
@@ -582,6 +630,7 @@ class HomePage extends StatelessWidget {
         .size
         .width;
     return Scaffold(
+        //backgroundColor: Colors.grey,
         bottomNavigationBar: BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
@@ -589,6 +638,7 @@ class HomePage extends StatelessWidget {
           unselectedItemColor: Colors.grey.shade300,
           type: BottomNavigationBarType.fixed,
           currentIndex: 0,
+          //currentIndex: _selectedIndex;
           items: [
             _bottomIcons(Icons.home),
             _bottomIcons(Icons.event),
@@ -596,9 +646,20 @@ class HomePage extends StatelessWidget {
             _bottomIcons(Icons.star_border),
           ],
           onTap: (index) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => LoadingScreen()));
-          },
+            if(index==0) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => calendar()));
+            }
+            else if(index==1) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => calendar()));
+            }
+            else
+            {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoadingPage()));
+            }
+            },
         ),
         body: SingleChildScrollView(
             child: Container(

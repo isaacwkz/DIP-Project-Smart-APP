@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/add_user_dialog.dart';
+import 'package:dip_taskplanner/components/add_user_dialog.dart';
 import 'package:dip_taskplanner/database/model/user.dart';
-import 'package:dip_taskplanner/home_presenter.dart';
+import 'package:dip_taskplanner/components/home_presenter.dart';
 
 class UserList extends StatelessWidget {
   List<User> country;

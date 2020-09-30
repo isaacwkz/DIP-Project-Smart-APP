@@ -1,19 +1,20 @@
 import 'package:dip_taskplanner/database/database_hepler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/Screen/CalendarPage.dart';
+import 'package:dip_taskplanner/Screen/CalendarOld.dart';
 import 'package:dip_taskplanner/components/regExp.dart';
-import 'package:dip_taskplanner/Screen/browser.dart';
-import 'package:dip_taskplanner/Screen/calendar.dart';
+import 'package:dip_taskplanner/Screen/webPage.dart';
+import 'package:dip_taskplanner/Screen/calendarPage.dart';
+import 'package:dip_taskplanner/Screen/homepage.dart';
 
 
-class LoadingScreen extends StatefulWidget {
+class LoadingPage extends StatefulWidget {
   @override
-  _LoadingScreenState createState() => _LoadingScreenState();
+  _LoadingPageState createState() => _LoadingPageState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> {
-  var datebasehelper = DatabaseHelper();
+class _LoadingPageState extends State<LoadingPage> {
+  var databasehelper = DatabaseHelper();
   String state = 'Loading Files';
   bool exist = false;
   final dateController = TextEditingController();
@@ -24,10 +25,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     existence();
   }
   Future<void> existence () async{
-    bool exist = await datebasehelper.coursesExist();
+    bool exist = await databasehelper.coursesExist();
     print(exist);
     setState((){
-      if(exist) state = '1';
+      if(exist) state = '2';
       else state = '2';
     });
   }
@@ -39,7 +40,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget getOption (){
     switch (state) {
       //case '1': return CalendarPage();
-      case '1': return  MyHomePage();
       case '2': return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -64,7 +64,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     padding: const EdgeInsets.only(left:0.0),
                     child: new RaisedButton(
                         child: Text(
-                          "Check Your Course Registed",
+                          "Check Your Course Registed (School Website)",
                           style: TextStyle(color: Colors.white, fontSize: 16.0),
                         ),
                         color: Color(0x1F415D),
@@ -73,12 +73,67 @@ class _LoadingScreenState extends State<LoadingScreen> {
                               .push(new MaterialPageRoute(builder: (_) {
                             return new Browser(
                               url: "https://sso.wis.ntu.edu.sg/webexe88/owa/sso_redirect.asp?t=1&app=https://wish.wis.ntu.edu.sg/pls/webexe/aus_stars_check.check_subject_web2",
-                              title: "Course Registration",
+                              title: "Course Registration System",
                             );
                           }));
                         })
                 ),
-
+                Padding(
+                    padding: const EdgeInsets.only(left:0.0),
+                    child: new RaisedButton(
+                        child: Text(
+                          "Delete previous course information and reload",
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                        color: Color(0x1F415D),
+                        onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('ARE YOU SURE TO DELETE ALL?'),
+                                content: Text('This will be irreversible.'),
+                                actions: [
+                                  FlatButton(
+                                    onPressed: () async {
+                                      await databasehelper.coursesExist();
+                                      await databasehelper.usersExist();
+                                      databasehelper.deleteAllUsers();
+                                      databasehelper.deleteAllCourses();
+                                      Navigator.of(context).pop();
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoadingPage()));
+                                    },
+                                    child: Text('Yes'),
+                                  ),
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('No'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(left:0.0),
+                    child: new RaisedButton(
+                        child: Text(
+                          "Return To HomePage Without Loading Course",
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                        color: Color(0x1F415D),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) { return  HomePage();}));
+                        }),
+                ),
                 Row(
                   
                   children: [
@@ -88,12 +143,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         final func = ListOfCourses();
                         if(myTextController.text.isNotEmpty){
                           bool check = func.addToDatabase(myTextController.text,context);
-                          if(check){ 
+                          if(check){
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return   MyHomePage();
+                                  return  HomePage();
                                 },
                               ),
                             );
@@ -136,11 +191,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     ),flex:1),
                   ],
                 ),
-
               ],
-
             )
-
           ),
         ),
     ),
