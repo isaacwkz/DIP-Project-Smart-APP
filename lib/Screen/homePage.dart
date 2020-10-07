@@ -1,4 +1,5 @@
 import 'package:dip_taskplanner/Screen/CalendarOld.dart';
+import 'package:dip_taskplanner/Screen/camera.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
@@ -325,7 +326,9 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.pushNamed(context, "gallery")
+                  },
                 ),
               ),
             ],
@@ -653,6 +656,10 @@ class _HomePageState extends State<HomePage> {
             else if(index==1) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => calendar()));
+            }
+            else if(index==2) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => CameraPageEntry()));
             }
             else
             {

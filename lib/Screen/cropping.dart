@@ -54,4 +54,4 @@ class _CroppingState extends State<CroppingPageEntry> {
     );
   }
 
-};
+}
