@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/music.dart';
 import 'package:audioplayer2/audioplayer2.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -315,3 +315,4 @@ enum PlayerState {
   stopped,
   paused
 }
+*/
