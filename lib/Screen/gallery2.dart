@@ -28,7 +28,7 @@ class GalleryExample extends StatefulWidget {
 class _GalleryExampleState extends State<GalleryExample> {
   bool verticalGallery = false;
 
-  Future getImages(conext) async {
+  Future getImages(context) async {
     try {
       print("get temporary diretory");
       final p = await getExternalStorageDirectory();
