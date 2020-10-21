@@ -5,6 +5,7 @@ import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
+import 'package:dip_taskplanner/picker/picker.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -326,8 +327,14 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  onPressed: () => {
+                  /*onPressed: () => {
                     Navigator.pushNamed(context, "gallery")
+                  },*/
+                  onPressed: () async {
+                    final result = await MediaPicker.show(context);
+                    if (result != null) {
+                      //setState(() => selection = result);
+                    }
                   },
                 ),
               ),
@@ -658,7 +665,7 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => calendar()));
             }
             else if(index==2) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CameraPageEntry()));
             }
             else

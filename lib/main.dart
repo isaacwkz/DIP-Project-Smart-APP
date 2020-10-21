@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
 import 'package:dip_taskplanner/Screen/homePage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
+import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 
 void main() => runApp(MyApp());
