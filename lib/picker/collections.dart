@@ -45,7 +45,8 @@ class _MediaCollectionsPageState extends State<MediaCollectionsPage> {
       orElse: () => null,
     );
     return DefaultTabController(
-      length: selection.mediaTypes.length + 1,
+      //length: selection.mediaTypes.length + 1,
+      length: selection.mediaTypes.length,
       child: Scaffold(
         appBar: AppBar(
           title: Text(labels.collectionsTitle),
@@ -56,11 +57,11 @@ class _MediaCollectionsPageState extends State<MediaCollectionsPage> {
           ],
           bottom: TabBar(
             tabs: [
-              ...selection.mediaTypes.map(
+              /*...selection.mediaTypes.map(
                 (x) => Tab(
                   text: x == MediaType.video ? labels.videos : labels.images,
                 ),
-              ),
+              ),*/
               Tab(
                 text: labels.albums,
               ),
@@ -69,7 +70,7 @@ class _MediaCollectionsPageState extends State<MediaCollectionsPage> {
         ),
         body: TabBarView(
           children: [
-            ...selection.mediaTypes.map(
+            /*...selection.mediaTypes.map(
               (x) => allCollection == null
                   ? SizedBox()
                   : MediaGrid(
@@ -77,7 +78,7 @@ class _MediaCollectionsPageState extends State<MediaCollectionsPage> {
                       collection: allCollection,
                       mediaType: x,
                     ),
-            ),
+            ),*/
             MediaAlbums(
               collections: collections
                   .where(
