@@ -298,6 +298,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.10-nullsafety.1"
+  media_gallery:
+    dependency: "direct main"
+    description:
+      name: media_gallery
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
   meta:
     dependency: transitive
     description:
@@ -571,4 +578,8 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
+<<<<<<< Updated upstream
   flutter: ">=1.12.13+hotfix.5 <2.0.0"
+=======
+  flutter: ">=1.22.0 <2.0.0"
+>>>>>>> Stashed changes
