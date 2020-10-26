@@ -11,6 +11,7 @@ import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
+import 'package:dip_taskplanner/picker/picker.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -113,9 +114,14 @@ class _CameraScreenState extends State<CameraPageEntry> {
                   color: Colors.black,
                 ),
                 backgroundColor: Colors.white,
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                /*onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                },*/
+                onPressed: () async {
+                  final result = await MediaPicker.show(context);
+                  if (result != null) {
+                    //setState(() => selection = result);
+                  }
                 },
               )
               ],

@@ -1,3 +1,4 @@
+import 'package:dip_taskplanner/Screen/ShowCourses.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         "loading":(context) => LoadingPage(),
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),
+        "course":(context) => showCourse(),
         //"gallery":(context) => GalleryPageEntry(),
         "gallery":(context) => GalleryExample(),
       } ,

@@ -1,4 +1,4 @@
-
+import 'package:dip_taskplanner/Screen/ShowCourses.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -6,16 +6,14 @@ import 'package:dip_taskplanner/components/add_user_dialog.dart';
 import 'package:dip_taskplanner/components/homescreen.dart';
 import 'package:dip_taskplanner/components/home_presenter.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
-
-
+import 'package:dip_taskplanner/database/model/course.dart';
+import 'package:dip_taskplanner/components/regExp.dart';
+import 'package:dip_taskplanner/database/database_hepler.dart';
 
 class calendar extends StatefulWidget {
-
   @override
   _calendarState createState() => _calendarState();
 }
-
-
 
 class _calendarState extends State<calendar> with TickerProviderStateMixin {
   //Vairable Initializaton
@@ -57,32 +55,31 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
     super.dispose();
   }
 
-
-void _onDaySelected(DateTime day, List events) {
+  void _onDaySelected(DateTime day, List events) {
     print('CALLBACK: _onDaySelected');
     setState(() {
       _selectedEvents = events;
-      _selectedDay=day;
+      _selectedDay = day;
       print(events);
       print(_selectedDay);
-      if(events.isEmpty)
-        events.add(['No course today, you may add events']);
-        _events[day]=events;
-        print(_events);
+      if (events.isEmpty) events.add(['No course today, you may add events']);
+      _events[day] = events;
+      print(_events);
     });
   }
 
-  void _onVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format) {
+  void _onVisibleDaysChanged(
+      DateTime first, DateTime last, CalendarFormat format) {
     print('CALLBACK: _onVisibleDaysChanged');
   }
 
-  void _onCalendarCreated(DateTime first, DateTime last, CalendarFormat format) {
+  void _onCalendarCreated(
+      DateTime first, DateTime last, CalendarFormat format) {
     print('CALLBACK: _onCalendarCreated');
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       //backgroundColor: Colors.grey,
       appBar: AppBar(
@@ -117,7 +114,8 @@ void _onDaySelected(DateTime day, List events) {
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
-        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0, fontWeight: FontWeight.bold),
+        formatButtonTextStyle: TextStyle().copyWith(
+            color: Colors.white, fontSize: 15.0, fontWeight: FontWeight.bold),
         formatButtonDecoration: BoxDecoration(
           color: Colors.deepOrange[400],
           borderRadius: BorderRadius.circular(16.0),
@@ -217,7 +215,9 @@ void _onDaySelected(DateTime day, List events) {
         shape: BoxShape.rectangle,
         color: _calendarController.isSelected(date)
             ? Colors.brown[500]
-            : _calendarController.isToday(date) ? Colors.brown[300] : Colors.blue[400],
+            : _calendarController.isToday(date)
+                ? Colors.brown[300]
+                : Colors.blue[400],
       ),
       width: 16.0,
       height: 16.0,
@@ -233,7 +233,6 @@ void _onDaySelected(DateTime day, List events) {
     );
   }
 
-
   Widget _buildButtons() {
     final dateTime = _events.keys.elementAt(_events.length - 2);
 
@@ -244,33 +243,30 @@ void _onDaySelected(DateTime day, List events) {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RaisedButton(
-              child: Text('Load Course'),
-              color: Color(0xFFA500),
-              onPressed: () {
-                Navigator.push(
+                child: Text('Load Course'),
+                color: Color(0xFFA500),
+                onPressed: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => LoadingPage()),
-                );
-              }
-            ),
+                  );
+                }),
             RaisedButton(
               child: Text('Course Schedule'),
               color: Color(0xFFA500),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.week);
-                });
-              },
-            ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => showCourse()),
+                  );
+                }),
             RaisedButton(
               child: Text('Add New Events'),
               color: Color(0xFFA500),
-              onPressed:() => _todoEdit(),
+              onPressed: () => _todoEdit(),
             ),
-
           ],
         ),
-
       ],
     );
   }
@@ -283,7 +279,8 @@ void _onDaySelected(DateTime day, List events) {
                   border: Border.all(width: 0.8),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
                   onTap: () => print('$event tapped!'),
@@ -327,8 +324,10 @@ void _onDaySelected(DateTime day, List events) {
       _selectedEvents.add(text);
 
       //_events.update;
-      _events[_selectedDay]= _selectedEvents;
+      _events[_selectedDay] = _selectedEvents;
       print(_events);
     });
   }
 }
+
+

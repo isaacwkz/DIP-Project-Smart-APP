@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:dip_taskplanner/database/model/course.dart';
+
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
 
@@ -33,7 +34,7 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE Event (id INTEGER PRIMARY KEY, eventname TEXT, eventloc TEXT, stime TEXT, etime TEXT, category TEXT, date TEXT)");
     await db.execute(
-        "CREATE TABLE Course (id INTEGER PRIMARY KEY, courseid TEXT , coursename TEXT, coursevenue TEXT, stime TEXT, etime TEXT, category TEXT, week TEXT, coursetype TEXT, academicunit TEXT, name TEXT)");
+        "CREATE TABLE Course (id INTEGER PRIMARY KEY, courseid TEXT , coursename TEXT, coursevenue TEXT, stime TEXT, etime TEXT, category TEXT, weekday TEXT, coursetype TEXT, academicunit TEXT, name TEXT)");
   }
 
   Future<int> saveUser(User user) async {
@@ -107,9 +108,11 @@ class DatabaseHelper {
     var dbClient = await db;
     dbClient.rawDelete("Delete from Event");
   }
+
   Future<int> saveCourse(Course course) async {
     var dbClient = await db;
     int res = await dbClient.insert("Course", course.toMap());
+    print(course);
     return res;
   }
 
@@ -119,13 +122,16 @@ class DatabaseHelper {
     List<Course> employees = new List();
     for (int i = 0; i < list.length; i++) {
       var course =
-        new Course(list[i]["courseid"],list[i]["coursename"], list[i]["coursevenue"], list[i]["stime"], list[i]["etime"], list[i]["category"],list[i]["week"],list[i]["coursetype"],list[i]["academicunit"],list[i]["name"]);
+        new Course(list[i]["courseid"],list[i]["coursename"], list[i]["coursevenue"], list[i]["stime"], list[i]["etime"], list[i]["category"],list[i]["weekday"], list[i]["teachingWeek"],list[i]["coursetype"],list[i]["academicunit"],list[i]["name"]);
       course.setCourseId(list[i]["id"]);
       employees.add(course);
     }
     //print(employees.length);
+    print(User);
+
     return employees;
   }
+
   Future<List<String>> getCourseid() async{
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT courseid FROM Course');
