@@ -375,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  onPressed: () => {},
+                  onPressed: () => { Navigator.pushNamed(context, "Study")},
                 ),
               ),
             ],
