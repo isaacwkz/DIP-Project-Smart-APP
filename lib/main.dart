@@ -21,8 +21,9 @@ class MyApp extends StatelessWidget {
         "loading":(context) => LoadingPage(),
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),
-        "gallery":(context) => GalleryPageEntry(),
         "course":(context) => showCourse(),
+        //"gallery":(context) => GalleryPageEntry(),
+        "gallery":(context) => GalleryExample(),
       } ,
       home: HomePage(),
     );

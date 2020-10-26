@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dip_taskplanner/components/regExp.dart';
 import 'package:dip_taskplanner/database/database_hepler.dart';
 import 'package:dip_taskplanner/database/model/course.dart';
@@ -17,7 +16,7 @@ import 'package:date_utils/date_utils.dart';
 import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
+import 'package:dip_taskplanner/Screen/gallery2.dart';
 
 const activeCardColour = Color(0xFF1D1E33);
 
