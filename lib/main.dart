@@ -1,3 +1,4 @@
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),
         "gallery":(context) => GalleryPageEntry(),
+        "Study":(context) => StudyPageEntry(),
       } ,
       home: HomePage(),
     );
