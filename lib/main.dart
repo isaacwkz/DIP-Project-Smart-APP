@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/Screen/todo.dart';
-import 'package:dip_taskplanner/Screen/coursePage.dart';
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
+import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
 import 'package:dip_taskplanner/Screen/homePage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
 import 'package:dip_taskplanner/Screen/gallery.dart';
-
+import 'package:dip_taskplanner/Screen/cropping.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +22,7 @@ class MyApp extends StatelessWidget {
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),
         "gallery":(context) => GalleryPageEntry(),
-        "todo":(context) => todo(),
-        "course":(context) => course(),
+        "Study":(context) => StudyPageEntry(),
       } ,
       home: HomePage(),
     );

@@ -1,7 +1,6 @@
-
+import 'package:dip_taskplanner/Screen/CalendarOld.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
-import 'package:dip_taskplanner/Screen/todo.dart';
 import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
 import 'package:flutter/material.dart';
@@ -187,6 +186,62 @@ class _HomePageState extends State<HomePage> {
                 child: FlatButton(
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),
+                  splashColor: buttonColor1,
+                  color: buttonColor1,
+                  child: new Row(
+                    children: <Widget>[
+                      new Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Load your timetable here",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      new Expanded(
+                        child: Container(),
+                      ),
+                      new Transform.translate(
+                        offset: Offset(15.0, 0.0),
+                        child: new Container(
+                          padding: const EdgeInsets.all(5.0),
+                          child: FlatButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius:
+                                new BorderRadius.circular(28.0)),
+                            splashColor: Colors.white,
+                            child: Icon(
+                              Icons.arrow_forward,
+                            ),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => CalendarPage()),);
+                              print("Loading page");
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  //onPressed: () => {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => LoadingPage()),);
+                    print("Loading page");
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 20.0),
+          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          child: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: FlatButton(
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0)),
                   splashColor: buttonColor2,
                   color: buttonColor2,
                   child: new Row(
@@ -213,65 +268,7 @@ class _HomePageState extends State<HomePage> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "calendar");
-                              print('calendar');
-                            },
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "calendar");
-                    print('calendar');
-                  },
-
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          child: new Row(
-            children: <Widget>[
-              new Expanded(
-                child: FlatButton(
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0)),
-                  splashColor: buttonColor1,
-                  color: buttonColor1,
-                  child: new Row(
-                    children: <Widget>[
-                      new Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: Text(
-                          "Check your to-do list here",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      new Expanded(
-                        child: Container(),
-                      ),
-                      new Transform.translate(
-                        offset: Offset(15.0, 0.0),
-                        child: new Container(
-                          padding: const EdgeInsets.all(5.0),
-                          child: FlatButton(
-                            shape: new RoundedRectangleBorder(
-                                borderRadius:
-                                new BorderRadius.circular(28.0)),
-                            splashColor: Colors.white,
-                            child: Icon(
-                              Icons.arrow_forward,
-                            ),
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => todo()));
-                              print("todo page");
-                            },
+                            onPressed: () => {},
                           ),
                         ),
                       )
@@ -279,10 +276,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   //onPressed: () => {},
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => todo()),);
-                    print("todo page");
+                    Navigator.pushNamed(context, "calendar");
+                    print('test');
                   },
+
                 ),
               ),
             ],

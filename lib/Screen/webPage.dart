@@ -20,6 +20,3 @@ class Browser extends StatelessWidget {
     );
   }
 }
-
-
-
