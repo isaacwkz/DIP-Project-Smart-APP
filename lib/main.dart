@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       //routes defines other pages which can be directed from homePage
       routes:{
+        "home":(context) => HomePage(),
         "loading":(context) => LoadingPage(),
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),

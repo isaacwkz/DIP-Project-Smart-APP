@@ -78,13 +78,15 @@ class _CreateTodoState extends State<DetailTodoScreen> {
       DatabaseHelper.instance.insertTodo(Todo(
           title: titleTextController.text,
           content: descriptionTextController.text));
-      Navigator.pop(context, "Your todo has been saved.");
+      //Navigator.pop(context, "Your todo has been saved.");
+      Navigator.pushNamed(context, "home");
       print('insert testing');
       print(todo);
     } else {
       await DatabaseHelper.instance
           .updateTodo(Todo(id: todo.id, title: title, content: content));
-      Navigator.pop(context);
+      //Navigator.pop(context);
+      Navigator.pushNamed(context, "home");
       print('update testing');
       print(todo);
     }

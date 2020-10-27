@@ -103,17 +103,6 @@ class _CreateCoursesState extends State<DetailcourseScreen> {
     );
   }
 
-  /*
-  Widget _build2() {
-
-    return Column(
-      children: <Widget>[
-
-      ],
-    );
-  }
-
-   */
 
   _savecourse(String weekDay, String courseId,String courseVenue,String courseTime,String courseType) async {
     if (course == null) {
@@ -126,14 +115,16 @@ class _CreateCoursesState extends State<DetailcourseScreen> {
       ));
       //print(weekDayTextController.text);
       //print(courseVenue);
-      Navigator.pop(context, "Your course has been saved.");
+      //Navigator.pop(context, "Your course has been saved.");
+      Navigator.pushNamed(context, "calendar");
       print('insert testing');
       print(course);
     }
     else {
       await DatabaseHelper.instance
           .updateCourse(Courses(id: course.id, weekDay: course.weekDay, courseId: course.courseId,courseVenue: course.courseVenue,courseTime: course.courseTime,courseType: course.courseType));
-      Navigator.pop(context);
+      //Navigator.pop(context);
+      Navigator.pushNamed(context, "calendar");
       print('update testing');
       print(course);
     }

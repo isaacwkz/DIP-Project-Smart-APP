@@ -19,7 +19,6 @@ class _StudyPageState extends State<StudyPageEntry> {
   Color buttonColor1 = LightColor.orange;
   Color buttonColor2 = LightColor.seeBlue;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
