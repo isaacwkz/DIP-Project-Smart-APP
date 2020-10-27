@@ -12,7 +12,6 @@ class ListOfCourses {
   String _endTime;
   String _category;
   String _teachingWeek;
-  String _weekDay;
   String _courseType;
   String _academicUnit;
   String _name;
@@ -23,7 +22,6 @@ class ListOfCourses {
   RegExp startTime = RegExp(r'\d\d\d\d-');
   RegExp endTime = RegExp(r'-\d\d\d\d');
   RegExp teachingWeek = RegExp(r'Teaching Wk\d[\d-]*-*\d*\d*');
-  RegExp weekDay = RegExp(r'(MON|TUE|WED|THU|FRI)');
   RegExp courseType = RegExp(r'(CORE|PRESCRIBED)');
   RegExp academicUnit = RegExp(r'\b[1-4]\b');
   RegExp day1 = RegExp(r'\d*\d');
@@ -122,7 +120,6 @@ class ListOfCourses {
     _startTime    = retrieveInfoOf(startTime,subStrings);
     _endTime      = retrieveInfoOf(endTime,subStrings);
     _category     = retrieveInfoOf(classType,subStrings);
-    _weekDay      = retrieveInfoOf(weekDay,subStrings);
     _teachingWeek = retrieveInfoOf(teachingWeek,subStrings);
     _courseType   = retrieveInfoOf(courseType,subStrings);
     _academicUnit = retrieveInfoOf(academicUnit,subStrings);
@@ -141,7 +138,7 @@ class ListOfCourses {
 
   Future addRecord() async {
     var db = new DatabaseHelper();
-    var course = new Course(_courseId, _courseName, _courseVenue, _startTime, _endTime, _category, _weekDay, _teachingWeek, _courseType, _academicUnit,_name);
+    var course = new Course(_courseId, _courseName, _courseVenue, _startTime, _endTime, _category, _teachingWeek, _courseType, _academicUnit,_name);
     await db.saveCourse(course);
   }
 

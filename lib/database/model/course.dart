@@ -7,13 +7,12 @@ class Course {
   String _eventST;
   String _eventET;
   String _eventCAT;
-  String _weekDay;
   String _teachingWeek;
   String _courseType;
   String _academicUnit;
   String _name;
 
-  Course(this._courseId,this._courseName, this._courseVenue, this._eventST, this._eventET,this._eventCAT,this._weekDay,this._teachingWeek,this._courseType,this._academicUnit,this._name);
+  Course(this._courseId,this._courseName, this._courseVenue, this._eventST, this._eventET,this._eventCAT,this._teachingWeek,this._courseType,this._academicUnit,this._name);
 
   Course.map(dynamic obj) {
     this._courseId = obj["courseid"];
@@ -22,8 +21,7 @@ class Course {
     this._eventST = obj["stime"];
     this._eventET = obj["etime"];
     this._eventCAT = obj["category"];
-    this._weekDay = obj["weekday"];
-    this._teachingWeek = obj["teachingWeek"];
+    this._teachingWeek = obj["week"];
     this._courseType = obj["coursetype"];
     this._academicUnit = obj["academicunit"];
     this._name = obj["name"];
@@ -40,8 +38,6 @@ class Course {
   String get eventET => _eventST;
 
   String get eventCAT => _eventCAT;
-
-  String get weekDay => _weekDay;
 
   String get teachingWeek => _teachingWeek;
 
@@ -60,8 +56,7 @@ class Course {
     map["stime"] = _eventST;
     map["etime"] = _eventET;
     map["category"] = _eventCAT;
-    map["weekday"] = _weekDay;
-    map["teachingWeek"] = _teachingWeek;
+    map["week"] = _teachingWeek;
     map["coursetype"] = _courseType;
     map["academicunit"] = _academicUnit;
     map["name"] = _name;

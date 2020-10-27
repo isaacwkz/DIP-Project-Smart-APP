@@ -33,7 +33,7 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE Event (id INTEGER PRIMARY KEY, eventname TEXT, eventloc TEXT, stime TEXT, etime TEXT, category TEXT, date TEXT)");
     await db.execute(
-        "CREATE TABLE Course (id INTEGER PRIMARY KEY, courseid TEXT , coursename TEXT, coursevenue TEXT, stime TEXT, etime TEXT, category TEXT, weekday TEXT, coursetype TEXT, academicunit TEXT, name TEXT)");
+        "CREATE TABLE Course (id INTEGER PRIMARY KEY, courseid TEXT , coursename TEXT, coursevenue TEXT, stime TEXT, etime TEXT, category TEXT, week TEXT, coursetype TEXT, academicunit TEXT, name TEXT)");
   }
 
   Future<int> saveUser(User user) async {
@@ -119,7 +119,7 @@ class DatabaseHelper {
     List<Course> employees = new List();
     for (int i = 0; i < list.length; i++) {
       var course =
-        new Course(list[i]["courseid"],list[i]["coursename"], list[i]["coursevenue"], list[i]["stime"], list[i]["etime"], list[i]["category"],list[i]["weekday"], list[i]["teachingWeek"],list[i]["coursetype"],list[i]["academicunit"],list[i]["name"]);
+        new Course(list[i]["courseid"],list[i]["coursename"], list[i]["coursevenue"], list[i]["stime"], list[i]["etime"], list[i]["category"],list[i]["week"],list[i]["coursetype"],list[i]["academicunit"],list[i]["name"]);
       course.setCourseId(list[i]["id"]);
       employees.add(course);
     }
