@@ -6,7 +6,6 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:dip_taskplanner/database/model/course.dart';
-
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
 
@@ -108,11 +107,9 @@ class DatabaseHelper {
     var dbClient = await db;
     dbClient.rawDelete("Delete from Event");
   }
-
   Future<int> saveCourse(Course course) async {
     var dbClient = await db;
     int res = await dbClient.insert("Course", course.toMap());
-    print(course);
     return res;
   }
 
@@ -127,11 +124,8 @@ class DatabaseHelper {
       employees.add(course);
     }
     //print(employees.length);
-    print(User);
-
     return employees;
   }
-
   Future<List<String>> getCourseid() async{
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery('SELECT courseid FROM Course');
