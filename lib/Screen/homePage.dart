@@ -372,13 +372,13 @@ class _HomePageState extends State<HomePage> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () => {},
+                            onPressed: () => { Navigator.pushNamed(context, "study")},
                           ),
                         ),
                       )
                     ],
                   ),
-                  onPressed: () => { Navigator.pushNamed(context, "Study")},
+                  onPressed: () => { Navigator.pushNamed(context, "study")},
                 ),
               ),
             ],

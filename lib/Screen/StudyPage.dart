@@ -7,41 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/text.dart';
 import 'package:flutter/cupertino.dart';
 
-/*void main() {
-  runApp(new MaterialApp(
-    title: 'Study',
-    home: new FirstScreen(),
-  ));
-}*/
-
-/*void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'STUDY',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: MyHomePage(title: 'STUDY'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
- */
 class StudyPageEntry extends StatefulWidget {
   @override
   _StudyPageState createState() => _StudyPageState();
@@ -54,28 +19,7 @@ class _StudyPageState extends State<StudyPageEntry> {
   Color buttonColor1 = LightColor.orange;
   Color buttonColor2 = LightColor.seeBlue;
 
- /* class FirstScreen extends StatelessWidget {
 
-    @override
-  Widget build(BuildContext context) {
-  return new Scaffold(
-  appBar: new AppBar(
-  title: new Text('StudyMode'),
-  ),
-  body: new Center(
-  child: new RaisedButton(
-  child: new Text('Launch new screen'),
-  onPressed: () {
-  Navigator.push(
-  context,
-  new MaterialPageRoute(builder: (context) => MusicPLayer()),
-  );
-  },
-  ),
-  ),
-  );
-  }
-  }*/
   @override
   Widget build(BuildContext context) {
     return Column(

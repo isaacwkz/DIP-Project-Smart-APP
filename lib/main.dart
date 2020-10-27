@@ -1,3 +1,4 @@
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/todo.dart';
 import 'package:dip_taskplanner/Screen/coursePage.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         "gallery":(context) => GalleryPageEntry(),
         "todo":(context) => todo(),
         "course":(context) => course(),
+        "study":(context) => StudyPageEntry(),
       } ,
       home: HomePage(),
     );
