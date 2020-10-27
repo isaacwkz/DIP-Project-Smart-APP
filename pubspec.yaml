@@ -61,7 +61,7 @@ flutter:
   assets:
     - lib/Assets/
     - lib/Assets/ntu.png
-    - lib/Assets/Sample.jpeg
+    - lib/Assets/Sample.png
     - lib/Assets/file.jpg
     - lib/Assets/calendar.png
     - lib/Assets/study.png

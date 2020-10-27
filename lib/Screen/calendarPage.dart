@@ -1,14 +1,10 @@
-import 'package:dip_taskplanner/Screen/ShowCourses.dart';
+import 'package:dip_taskplanner/Screen/coursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:dip_taskplanner/components/add_user_dialog.dart';
-import 'package:dip_taskplanner/components/homescreen.dart';
-import 'package:dip_taskplanner/components/home_presenter.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
-import 'package:dip_taskplanner/database/model/course.dart';
-import 'package:dip_taskplanner/components/regExp.dart';
-import 'package:dip_taskplanner/database/database_hepler.dart';
+import 'package:dip_taskplanner/database/model/Courses.dart';
+import 'package:dip_taskplanner/database/database.dart';
 
 class calendar extends StatefulWidget {
   @override
@@ -17,12 +13,14 @@ class calendar extends StatefulWidget {
 
 class _calendarState extends State<calendar> with TickerProviderStateMixin {
   //Vairable Initializaton
-  Map<DateTime, List> _events;
+  Map<DateTime, List<dynamic>> _events;
   List _selectedEvents;
   DateTime _selectedDay;
+  List<Courses> allCourseInfo;
 
   AnimationController _animationController;
   CalendarController _calendarController;
+  //final database = DatabaseNew();
 
   @override
   void initState() {
@@ -30,12 +28,14 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
     final _selectedDay = DateTime.now();
     print(_selectedDay);
     print(_selectedEvents);
+    getAllCourseInfo();
 
     _events = {
       _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
       _selectedDay: ['Event A7', 'Event B7', 'Event C7'],
       _selectedDay.add(Duration(days: 1)): ['Event A8', 'Event B8'],
     };
+
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
@@ -46,6 +46,10 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
     );
 
     _animationController.forward();
+  }
+
+  Future<void> getAllCourseInfo() async {
+    //print(await database.getCourses());
   }
 
   @override
@@ -243,7 +247,7 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RaisedButton(
-                child: Text('Load Course'),
+                child: Text('Check Course'),
                 color: Color(0xFFA500),
                 onPressed: () {
                   Navigator.push(
@@ -257,7 +261,7 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => showCourse()),
+                    MaterialPageRoute(builder: (context) => course()),
                   );
                 }),
             RaisedButton(
