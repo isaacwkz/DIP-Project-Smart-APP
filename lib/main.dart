@@ -1,6 +1,8 @@
-import 'package:dip_taskplanner/Screen/ShowCourses.dart';
-import 'package:dip_taskplanner/Screen/loadingPage.dart';
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:flutter/material.dart';
+import 'package:dip_taskplanner/Screen/todo.dart';
+import 'package:dip_taskplanner/Screen/coursePage.dart';
+import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
 import 'package:dip_taskplanner/Screen/homePage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
@@ -18,12 +20,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       //routes defines other pages which can be directed from homePage
       routes:{
+        "home":(context) => HomePage(),
         "loading":(context) => LoadingPage(),
         "calendar":(context) => calendar(),
         "camera":(context) => CameraPageEntry(),
-        "course":(context) => showCourse(),
-        "gallery":(context) => GalleryPageEntry(),
-        //"gallery":(context) => GalleryExample(),
+        "gallery":(context) => GalleryExample(),
+        "todo":(context) => todo(),
+        "course":(context) => course(),
+        "study":(context) => StudyPageEntry(),
       } ,
       home: HomePage(),
     );

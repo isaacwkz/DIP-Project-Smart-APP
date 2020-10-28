@@ -1,35 +1,25 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:dip_taskplanner/music.dart';
+import 'package:dip_taskplanner/Screen/music.dart';
 import 'package:audioplayer2/audioplayer2.dart';
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
+import 'package:flutter/src/widgets/text.dart';
+import 'package:dip_taskplanner/theme/color/light_color.dart';
 
-//void main() => runApp(MyApp());
+import 'package:flutter/cupertino.dart';
 
-/*class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Music Fox',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: MyHomePage(title: 'Music Fox'),
-    );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
 
+class MusicPLayer extends StatefulWidget {
+  MusicPLayer({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MusicPlayerState createState() => _MusicPlayerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MusicPlayerState extends State<MusicPLayer> {
 
   List<Music> playlist = [
     new Music('Dreams', 'Dreams Team', 'lib/Assets/img/un.jpg', 'https://www.bensound.com/royalty-free-music?download=dreams'),
@@ -59,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.orange,
-        title: Text(widget.title),
+        title: const Text('musicplayer'),
       ),
       backgroundColor: Colors.black,
       body: new Stack(
@@ -188,6 +178,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ]
       )       // This trailing comma makes auto-formatting nicer for build methods.
     );
+
+
   }
 
   IconButton buttonStyleWidget(IconData icone, double size, ActionMusic action) {
@@ -315,4 +307,4 @@ enum PlayerState {
   stopped,
   paused
 }
-*/
+
