@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:dip_taskplanner/database/model/Courses.dart';
 import 'package:dip_taskplanner/database/model/Todo.dart';
+import 'package:dip_taskplanner/database/model/Events.dart';
 
 class DatabaseHelper {
   //Create a private constructor
@@ -28,6 +29,8 @@ class DatabaseHelper {
               "CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title TEXT, content TEXT)");
           await db.execute(
               "CREATE TABLE Courses(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, weekDay TEXT, courseId TEXT , courseVenue TEXT, courseTime TEXT, courseType TEXT)");
+          await db.execute(
+              "CREATE TABLE events(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, events TEXT, time TEXT)");
         });
   }
 
@@ -104,6 +107,44 @@ class DatabaseHelper {
   deleteCourse(int id) async {
     var db = await database;
     db.delete(Courses.TABLENAME, where: 'id = ?', whereArgs: [id]);
+  }
+
+
+  insertEvents(Events events) async {
+    final db = await database;
+    var res = await db.insert(Events.TABLENAME, events.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+    print(events);
+    print('test');
+    return res;
+  }
+
+  Future<List<Events>> retrieveEvents() async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query(Events.TABLENAME);
+
+    return List.generate(maps.length, (i) {
+      return Events(
+        id: maps[i]['id'],
+        events: maps[i]['events'],
+        time: maps[i]['time'],
+      );
+    });
+  }
+
+  updateEvents(Events events) async {
+    final db = await database;
+
+    await db.update(Events.TABLENAME, events.toMap(),
+        where: 'id = ?',
+        whereArgs: [events.id],
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  deleteEvents(int id) async {
+    var db = await database;
+    db.delete(Events.TABLENAME, where: 'id = ?', whereArgs: [id]);
   }
 }
 

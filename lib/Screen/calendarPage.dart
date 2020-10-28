@@ -5,6 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/database/model/Courses.dart';
 import 'package:dip_taskplanner/database/database.dart';
+import 'package:dip_taskplanner/Screen/webPage.dart';
 
 class calendar extends StatefulWidget {
   @override
@@ -80,6 +81,22 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
   void _onCalendarCreated(
       DateTime first, DateTime last, CalendarFormat format) {
     print('CALLBACK: _onCalendarCreated');
+  }
+
+  Map<String, dynamic> encodeMap(Map<DateTime, dynamic> map) {
+    Map<String, dynamic> newMap = {};
+    map.forEach((key, value) {
+      newMap[key.toString()] = map[key];
+    });
+    return newMap;
+  }
+
+  Map<DateTime, dynamic> decodeMap(Map<String, dynamic> map) {
+    Map<DateTime, dynamic> newMap = {};
+    map.forEach((key, value) {
+      newMap[DateTime.parse(key)] = map[key];
+    });
+    return newMap;
   }
 
   @override
@@ -250,10 +267,13 @@ class _calendarState extends State<calendar> with TickerProviderStateMixin {
                 child: Text('Check Course'),
                 color: Color(0xFFA500),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoadingPage()),
-                  );
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(builder: (_) {
+                        return new Browser(
+                          url: "https://sso.wis.ntu.edu.sg/webexe88/owa/sso_redirect.asp?t=1&app=https://wish.wis.ntu.edu.sg/pls/webexe/aus_stars_check.check_subject_web2",
+                          title: "Course Registration System",
+                        );
+                      }));
                 }),
             RaisedButton(
               child: Text('Course Schedule'),
