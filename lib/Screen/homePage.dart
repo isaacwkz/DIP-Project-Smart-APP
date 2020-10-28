@@ -322,11 +322,8 @@ class _HomePageState extends State<HomePage> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () async {
-                              final result = await MediaPicker.show(context);
-                              if (result != null) {
-                                //setState(() => selection = result);
-                              }
+                            onPressed: () {
+                              Navigator.pushNamed(context, "gallery");
                             },
                           ),
                         ),
@@ -339,6 +336,7 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () async {
                     final result = await MediaPicker.show(context);
                     if (result != null) {
+                      print('file path: $result');
                       //setState(() => selection = result);
                     }
                   },

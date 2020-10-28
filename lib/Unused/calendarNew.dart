@@ -441,10 +441,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           return children;
         },
       ),
-      onDaySelected: (date, events) {
+      /*onDaySelected: (date, events) {
         _onDaySelected(date, events);
         _animationController.forward(from: 0.0);
-      },
+      },*/
       onVisibleDaysChanged: _onVisibleDaysChanged,
     );
   }
