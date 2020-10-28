@@ -333,15 +333,8 @@ class _HomePageState extends State<HomePage> {
                       )
                     ],
                   ),
-                  /*onPressed: () => {
-                    Navigator.pushNamed(context, "gallery")
-                  },*/
-                  onPressed: () async {
-                    final result = await MediaPicker.show(context);
-                    if (result != null) {
-                      print('file path: $result');
-                      //setState(() => selection = result);
-                    }
+                  onPressed: () {
+                    Navigator.pushNamed(context, "gallery");
                   },
                 ),
               ),

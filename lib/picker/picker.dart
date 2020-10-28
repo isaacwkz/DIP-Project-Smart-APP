@@ -41,7 +41,8 @@ class MediaPicker extends StatefulWidget {
           ],
         ),
       );
-    } else if (await Permission.storage.request().isGranted &&
+    }
+    else if (await Permission.storage.request().isGranted &&
         (mediaStatus.isGranted ||
             await Permission.photos.request().isGranted)) {
       final result = await Navigator.push(
