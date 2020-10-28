@@ -31,6 +31,7 @@ class MediaViewerPage extends StatelessWidget {
   }
 }
 
+
 class MediaImagePlayer extends StatefulWidget {
   final Media media;
 
@@ -42,6 +43,7 @@ class MediaImagePlayer extends StatefulWidget {
   _MediaImagePlayerState createState() => _MediaImagePlayerState();
 }
 
+//This class contains the widget to open the fullsized media
 class _MediaImagePlayerState extends State<MediaImagePlayer> {
   File file;
   Map<String, IfdTag> exif;
@@ -64,6 +66,7 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
     }
   }
 
+  //This widget show the selected media in full size
   @override
   Widget build(BuildContext context) {
     return Column(

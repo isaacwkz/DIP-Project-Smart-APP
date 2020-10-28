@@ -75,6 +75,7 @@ class MediaGrid extends StatefulWidget {
   _MediaGridState createState() => _MediaGridState();
 }
 
+
 class _MediaGridState extends State<MediaGrid>
     with AutomaticKeepAliveClientMixin {
   List<MediaPage> pages = [];

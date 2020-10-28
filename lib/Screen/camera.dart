@@ -13,6 +13,9 @@ import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/database/database.dart';
+import 'package:path_provider_ex/path_provider_ex.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -162,11 +165,21 @@ class _CameraScreenState extends State<CameraPageEntry> {
 
   onCapture(context) async {
     try {
-      print("get directory directory");
-      final photoDir = await getExternalStorageDirectory();
+      var permissionStatus = await Permission.storage.status;
+      if(!permissionStatus.isGranted){
+        await Permission.storage.request();
+      }
+
+      print("get directory");
+      //final photoDir = await getExternalStorageDirectory();
       //final photoDir = await getApplicationDocumentsDirectory();
-      print(photoDir);
-      final fileName = DateTime.now();
+      //final photoDir = await getApplicationDocumentsDirectory();
+      final storageInfo = await PathProviderEx.getStorageInfo();
+      final Directory photoDir = Directory(p.join('${storageInfo[0].rootDir}', 'dip_taskplanner'));
+      print(photoDir.path);
+      final _fileName = DateTime.now();
+      String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(_fileName);
+
       print("get courseID from database");
       final courseID = await DatabaseHelper.instance.retrieveCourses();
       //TODO: Write logic to check for current module and set the appropriate folder
@@ -190,7 +203,6 @@ class _CameraScreenState extends State<CameraPageEntry> {
       //smash everything together and pass full path into cameraController
       final path = "${photoDir.path}/${moduleCode}/$fileName.png";
       print("full file path: $path");
-      //what even does value does in this line
       await cameraController.takePicture(path).then((value){
         print('Saving Photo to');
         print(path);
@@ -198,10 +210,8 @@ class _CameraScreenState extends State<CameraPageEntry> {
       });
 
     } catch (e) {
-      //print('CAMERA EXCEPTION!');
+      print('CAMERA EXCEPTION!');
       showCameraException(e);
-      //It prints out "CAMERA EXCEPTION!" in my console, but it doesnt move on
-      //to the next line where it displays the actual exception????
     }
   }
 
@@ -290,7 +300,8 @@ class _CameraScreenState extends State<CameraPageEntry> {
   }
 
   showCameraException(e) {
-    String errorText = 'Error ${e.code} \nError message: ${e.description}';
+      String errorText = 'Error ${e.code} \nError message: ${e.description}';
+      print(errorText);
   }
 }
 
