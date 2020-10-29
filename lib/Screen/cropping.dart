@@ -30,30 +30,6 @@ class CroppingPageEntry extends StatefulWidget {
 class _CroppingState extends State<CroppingPageEntry> {
   File imageFile;
 
-  /// Get from gallery
-  _getFromGallery() async {
-    PickedFile pickedFile = await ImagePicker().getImage(
-      source: ImageSource.gallery,
-      maxWidth: 1800,
-      maxHeight: 1800,
-    );
-    _cropImage(pickedFile.path);
-  }
-
-  /// Crop Image
-  Future<Null> _cropImage(filePath) async {
-    File croppedImage = await ImageCropper.cropImage(
-        sourcePath: filePath,
-        maxWidth: 1080,
-        maxHeight: 1080,
-        aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0)
-    );
-    if (croppedImage  != null) {
-      imageFile = croppedImage ;
-      setState(() {});
-    }
-  }
-
   cropping(context) async {
 
     final CropScreenArguments args = ModalRoute.of(context).settings.arguments;
@@ -81,12 +57,18 @@ class _CroppingState extends State<CroppingPageEntry> {
           minimumAspectRatio: 1.0,
         )
     );
+    if (croppedFile != null) {
+      imageFile = croppedFile;
+      await imageFile.copy('$imageFilePath');
+    }
   }
+
 
   @override
   void initState() {
     super.initState();
-    _getThingsOnStartup(context);
+    _cropThis(context);
+
   }
 
   @override
@@ -94,8 +76,10 @@ class _CroppingState extends State<CroppingPageEntry> {
     return Container();
   }
 
-  Future _getThingsOnStartup(context) async {
+  Future _cropThis(context) async {
     await Future.delayed(Duration(milliseconds: 100));
       cropping(context);
+    Navigator.pop(context);
+    Navigator.pop(context);
   }
 }
