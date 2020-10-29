@@ -359,7 +359,16 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         child: Icon(Icons.crop,color: Colors.black,),
                         backgroundColor: Colors.white,
                         onPressed: (){
-
+                          //Navigator.pushNamed(context, 'cropping');
+                          //print('${widget.imgPath}');
+                          Navigator.pushNamed(
+                            context,
+                            "cropping",
+                            arguments: CropScreenArguments(
+                              '${widget.imgPath}',
+                              '${widget.fileName}',
+                            ),
+                          );
                           },
                         ),
                       ),

@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         "todo":(context) => todo(),
         "course":(context) => course(),
         "study":(context) => StudyPageEntry(),
+        "cropping":(context) => CroppingPageEntry(),
       } ,
       home: HomePage(),
     );
