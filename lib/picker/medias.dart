@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:media_gallery/media_gallery.dart';
+import 'package:dip_taskplanner/picker/validate.dart';
 
 import 'labels.dart';
 import 'selection.dart';
@@ -16,6 +17,7 @@ class MediasPage extends StatefulWidget {
   @override
   _MediaImagesPageState createState() => _MediaImagesPageState();
 }
+
 
 class _MediaImagesPageState extends State<MediasPage> {
   @override
@@ -150,7 +152,9 @@ class _MediaGridState extends State<MediaGrid>
               key: Key(x.id),
               animation: selection,
               builder: (context, _) => InkWell(
-                onTap: () => selection.toggle(x),
+                onTap: () {
+                  selection.toggle(x);
+                },
                 child: Selectable(
                   isSelected: selection.contains(x),
                   child: MediaThumbnailImage(

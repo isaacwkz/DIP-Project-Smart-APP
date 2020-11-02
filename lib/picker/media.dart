@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:media_gallery/media_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:video_player/video_player.dart';
+import 'package:image_editor_pro/image_editor_pro.dart';
 
 class MediaViewerPage extends StatelessWidget {
   final Media media;
@@ -35,6 +36,7 @@ class MediaViewerPage extends StatelessWidget {
 class MediaImagePlayer extends StatefulWidget {
   final Media media;
 
+
   const MediaImagePlayer({
     @required this.media,
   });
@@ -47,6 +49,7 @@ class MediaImagePlayer extends StatefulWidget {
 class _MediaImagePlayerState extends State<MediaImagePlayer> {
   File file;
   Map<String, IfdTag> exif;
+  File _image;
 
   @override
   void initState() {
@@ -66,6 +69,7 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
     }
   }
 
+
   //This widget show the selected media in full size
   @override
   Widget build(BuildContext context) {
@@ -81,16 +85,45 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
             ),
           ),
         ),
-        SizedBox(
+        FloatingActionButton(
+          onPressed:() {
+            getimageditor();
+          },
+          child: Icon(Icons.edit),
+          backgroundColor: Colors.white,
+        ),
+
+        /*SizedBox(
           height: 200,
           child: SingleChildScrollView(
             child: Text("$exif"),
           ),
-        )
+        )*/
       ],
     );
   }
+
+  Future<void> getimageditor() {
+    final geteditimage = Navigator.push(
+        context, MaterialPageRoute(builder: (context) {
+      return ImageEditorPro(
+        appBarColor: Colors.blue,
+        bottomBarColor: Colors.blue,
+      );
+    })).then((geteditimage) {
+      if (geteditimage != null) {
+        setState(() {
+          _image = geteditimage;
+        });
+      }
+    }).catchError((er) {
+      print(er);
+    });
+  }
+
 }
+
+
 
 class MediaVideoPlayer extends StatefulWidget {
   final Media media;

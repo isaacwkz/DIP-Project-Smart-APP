@@ -20,7 +20,7 @@ class MediaPicker extends StatefulWidget {
 
   static Future<MediaPickerSelection> show(
     BuildContext context, {
-    int maxImages = 10,
+    int maxImages = 1,
     MediaPickerLabels labels,
     }) async {
     final mediaStatus = await Permission.photos.status;
@@ -55,7 +55,7 @@ class MediaPicker extends StatefulWidget {
                 MediaType.image,
                 //MediaType.video,
               ],
-              maxItems: 10,
+              maxItems: 1,
             ),
           ),
         ),

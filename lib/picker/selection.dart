@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:media_gallery/media_gallery.dart';
+import 'package:dip_taskplanner/picker/validate.dart';
 
 class MediaPickerSelection extends ChangeNotifier {
   final List<Media> selectedMedias;
@@ -39,6 +40,7 @@ class MediaPickerSelection extends ChangeNotifier {
       remove(media);
     } else {
       add(media);
+      //onValidate: (selection) => Navigator.pop(context, selection),
     }
   }
 
