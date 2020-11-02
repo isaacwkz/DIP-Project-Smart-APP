@@ -53,13 +53,26 @@ class _StudyModeState extends State<StudyMode> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text('study mode'),
         ),
+
         body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+          child:
+          Container(
+              decoration: new BoxDecoration(
+                color: Colors.black,
+                border: new Border.all(width: 2.0, color: Colors.black),
+                borderRadius: new BorderRadius.all(new Radius.circular(20.0)),
+                image: new DecorationImage(
+                  image: new AssetImage("lib/Assets/studymode_pic.jpg"),
+    ),
+    ),
+    alignment: Alignment.center,
+          child:
+            (
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: <
               Widget>[
             Text('Current Filter: $_filterName'),
             SizedBox(
@@ -74,35 +87,52 @@ class _StudyModeState extends State<StudyMode> with WidgetsBindingObserver {
               onPressed: () {
                 FlutterDnd.gotoPolicySettings();
               },
-              child: Text('GOTO POLICY SETTINGS'),
+              color: Color(0x1F415D),
+              child: Text('GOTO POLICY SETTINGS',
+                  style: TextStyle(
+                  color: Colors.white, fontSize: 16.0),),
             ),
             RaisedButton(
               onPressed: () async {
                 setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_NONE);
               },
-              child: Text('TURN ON DND'),
+              color: Color(0x1F415D),
+              child: Text('TURN ON DND',
+                style: TextStyle(
+                  color: Colors.white, fontSize: 16.0),),
             ),
             RaisedButton(
               onPressed: () {
                 setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_ALL);
               },
-              child: Text('TURN OFF DND'),
+              color: Color(0x1F415D),
+              child: Text('TURN OFF DND',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 16.0),),
             ),
             RaisedButton(
               onPressed: () {
                 setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_ALARMS);
               },
-              child: Text('TURN ON DND - ALLOW ALARM'),
+              color: Color(0x1F415D),
+              child: Text('TURN ON DND - ALLOW ALARM',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 16.0),),
             ),
             RaisedButton(
               onPressed: () {
                 setInterruptionFilter(FlutterDnd.INTERRUPTION_FILTER_PRIORITY);
               },
-              child: Text('TURN ON DND - ALLOW PRIORITY'),
+              color: Color(0x1F415D),
+              child: Text('TURN ON DND - ALLOW PRIORITY',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 16.0),),
             )
-          ]),
-        ),
-      ),
-    );
+          ])
+    )
+          )
+          )
+        );
+
   }
 }

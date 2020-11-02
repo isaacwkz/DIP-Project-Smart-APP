@@ -21,8 +21,15 @@ class _StudyPageState extends State<StudyPageEntry> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: <Widget>[
+        Container(
+          width: 300,
+          height: 250,
+          color: Colors.black,
+          child: Image.asset("lib/Assets/music.jpg"),
+        ),
         Container(
           margin: const EdgeInsets.only(top: 20.0),
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -73,6 +80,12 @@ class _StudyPageState extends State<StudyPageEntry> {
               ),
             ],
           ),
+        ),
+        Container(
+          width: 300,
+          height: 250,
+          color: Colors.black,
+          child: Image.asset("lib/Assets/study_pic.jpg"),
         ),
         Container(
           margin: const EdgeInsets.only(top: 20.0),
@@ -129,9 +142,6 @@ class _StudyPageState extends State<StudyPageEntry> {
     );
   }
  }
-
-
-
 
 
 
