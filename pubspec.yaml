@@ -80,9 +80,9 @@ flutter:
     - lib/Assets/img/un.jpg
     - lib/Assets/img//deux.jpg
     - lib/Assets/img//background.jpg
-    - lib/Assets/study_pic.png
-    - lib/Assets/music.png
-    - lib/Assets/studymode_pic.png
+    - lib/Assets/study_pic.jpg
+    - lib/Assets/music.jpg
+    - lib/Assets/studymode_pic.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
