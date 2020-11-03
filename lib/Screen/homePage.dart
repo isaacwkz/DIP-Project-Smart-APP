@@ -3,9 +3,12 @@ import 'package:dip_taskplanner/Screen/camera.dart';
 import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/Screen/todo.dart';
 import 'package:dip_taskplanner/components/quad_clipper.dart';
+import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
+import 'package:dip_taskplanner/picker/picker.dart';
+import 'package:dip_taskplanner/picker/collections.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -323,14 +326,30 @@ class _HomePageState extends State<HomePage> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () => {},
+                            onPressed: () async {
+                              //Navigator.pushNamed(context, "gallery");
+                                final result = await MediaPicker.show(context);
+                                if (result != null) {
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context) =>
+                                          MediaViewerPage(media: result.
+                                          selectedMedias[0])));
+                                }
+                            },
                           ),
                         ),
                       )
                     ],
                   ),
-                  onPressed: () => {
-                    Navigator.pushNamed(context, "gallery")
+                  onPressed: () async {
+                    //Navigator.pushNamed(context, "gallery");
+                    final result = await MediaPicker.show(context);
+                    if (result != null) {
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) =>
+                              MediaViewerPage(media: result
+                                  .selectedMedias[0])));
+                    }
                   },
                 ),
               ),
@@ -661,7 +680,7 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => calendar()));
             }
             else if(index==2) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CameraPageEntry()));
             }
             else

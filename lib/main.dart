@@ -6,8 +6,8 @@ import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
 import 'package:dip_taskplanner/Screen/homePage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
-
+import 'package:dip_taskplanner/Screen/gallery2.dart';
+import 'package:dip_taskplanner/Screen/cropping.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         "todo":(context) => todo(),
         "course":(context) => course(),
         "study":(context) => StudyPageEntry(),
+        "cropping":(context) => CroppingPageEntry(),
       } ,
       home: HomePage(),
     );

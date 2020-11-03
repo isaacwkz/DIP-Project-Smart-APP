@@ -13,7 +13,9 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 // Entry point into the gallery
+/*
 class GalleryPageEntry extends StatefulWidget {
+
   @override
   _GalleryState createState() => _GalleryState();
 }
@@ -142,3 +144,4 @@ class _GalleryState extends State<GalleryPageEntry> {
   }
 
 }
+*/

@@ -5,12 +5,17 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:camera/camera.dart';
-import 'package:path/path.dart' show join;
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
+import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
+import 'package:dip_taskplanner/picker/picker.dart';
+import 'package:dip_taskplanner/database/database.dart';
+import 'package:path_provider_ex/path_provider_ex.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -114,9 +119,14 @@ class _CameraScreenState extends State<CameraPageEntry> {
                 ),
                 backgroundColor: Colors.white,
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
                 },
+                /*onPressed: () async {
+                  final result = await MediaPicker.show(context);
+                  if (result != null) {
+                    //setState(() => selection = result);
+                  }
+                },*/
               )
               ],
           ),
@@ -155,24 +165,52 @@ class _CameraScreenState extends State<CameraPageEntry> {
 
   onCapture(context) async {
     try {
-      print("get temporary diretory");
-      final p = await getExternalStorageDirectory();
-      print(p);
-      final name = DateTime.now();
-      //final name = "TestTest";
-      final path = "${p.path}/$name.png";
-      //final path = "${p.path}/TestTest.png";
-      print("full file path:");
-      print(path);
+      var permissionStatus = await Permission.storage.status;
+      if(!permissionStatus.isGranted){
+        await Permission.storage.request();
+      }
 
-      await cameraController.takePicture(path).then((value) {
+      print("get directory");
+      //final photoDir = await getExternalStorageDirectory();
+      //final photoDir = await getApplicationDocumentsDirectory();
+      //final photoDir = await getApplicationDocumentsDirectory();
+      final storageInfo = await PathProviderEx.getStorageInfo();
+      final Directory photoDir = Directory(p.join('${storageInfo[0].rootDir}', 'dip_taskplanner'));
+      print(photoDir.path);
+      final _fileName = DateTime.now();
+      String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(_fileName);
+
+      print("get courseID from database");
+      final courseID = await DatabaseHelper.instance.retrieveCourses();
+      //TODO: Write logic to check for current module and set the appropriate folder
+      //TODO: Catch the case if there is no course registered maybe?
+      final moduleCode = courseID[0].courseId;
+
+      print(moduleCode);
+      //check and create the folder if it does not exist
+      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '${moduleCode}'));
+      print('Check whether directory exists: $tempDirectory');
+      if(await tempDirectory.exists()){
+        print('Path exists');
+      } else {
+        print('Path does not exist, creating path');
+        //TODO: Create an exception catcher maybe? LEL
+        await tempDirectory.create(recursive: true);
+        print('Path created');
+        //or isit?
+      }
+
+      //smash everything together and pass full path into cameraController
+      final path = "${photoDir.path}/${moduleCode}/$fileName.png";
+      print("full file path: $path");
+      await cameraController.takePicture(path).then((value){
         print('Saving Photo to');
         print(path);
-        //Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$name.png",)));
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "TestTest.png",)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
       });
 
     } catch (e) {
+      print('CAMERA EXCEPTION!');
       showCameraException(e);
     }
   }
@@ -262,7 +300,8 @@ class _CameraScreenState extends State<CameraPageEntry> {
   }
 
   showCameraException(e) {
-    String errorText = 'Error ${e.code} \nError message: ${e.description}';
+      String errorText = 'Error ${e.code} \nError message: ${e.description}';
+      print(errorText);
   }
 }
 
@@ -320,7 +359,14 @@ class _PreviewScreenState extends State<PreviewScreen> {
                         child: Icon(Icons.crop,color: Colors.black,),
                         backgroundColor: Colors.white,
                         onPressed: (){
-
+                          Navigator.pushNamed(
+                            context,
+                            "cropping",
+                            arguments: CropScreenArguments(
+                              '${widget.imgPath}',
+                              '${widget.fileName}',
+                            ),
+                          );
                           },
                         ),
                       ),
