@@ -12,6 +12,7 @@ import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
+import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/database/database.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -118,8 +119,15 @@ class _CameraScreenState extends State<CameraPageEntry> {
                   color: Colors.black,
                 ),
                 backgroundColor: Colors.white,
-                onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                onPressed: () async {
+                  Navigator.pop(context);
+                  final result = await MediaPicker.show(context);
+                  if (result != null) {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            MediaViewerPage(media: result.
+                            selectedMedias[0])));
+                  }
                 },
                 /*onPressed: () async {
                   final result = await MediaPicker.show(context);
@@ -382,11 +390,15 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             color: Colors.black,
                           ),
                           backgroundColor: Colors.white,
-                          onPressed: () {
-                            //pops stack, remove photo preview from stack
-                            //not that pressing back from next route goes back to camera
+                          onPressed: () async {
                             Navigator.pop(context);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => GalleryPageEntry()),);
+                            final result = await MediaPicker.show(context);
+                            if (result != null) {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) =>
+                                      MediaViewerPage(media: result.
+                                      selectedMedias[0])));
+                            }
                           },
                         )
                       ),
