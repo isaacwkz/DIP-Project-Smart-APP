@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/music.dart';
 import 'package:audioplayer2/audioplayer2.dart';
-import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:flutter/src/widgets/text.dart';
-import 'package:dip_taskplanner/theme/color/light_color.dart';
 
 import 'package:flutter/cupertino.dart';
 

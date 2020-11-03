@@ -1,6 +1,5 @@
 
 import 'package:dip_taskplanner/components/StudyMode.dart';
-import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/components/MUsicPlayer.dart';
 import 'package:dip_taskplanner/theme/color/light_color.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class StudyPageEntry extends StatefulWidget {
 
 class _StudyPageState extends State<StudyPageEntry> {
 
-  String _path = null;
 
   Color buttonColor1 = LightColor.orange;
   Color buttonColor2 = LightColor.seeBlue;
