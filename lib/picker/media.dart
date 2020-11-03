@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:media_gallery/media_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:video_player/video_player.dart';
+//import 'package:video_player/video_player.dart';
 import 'package:image_editor_pro/image_editor_pro.dart';
 
 class MediaViewerPage extends StatelessWidget {
@@ -25,7 +25,7 @@ class MediaViewerPage extends StatelessWidget {
           ? MediaImagePlayer(
               media: media,
             )
-          : MediaVideoPlayer(
+          : MediaImagePlayer(
               media: media,
             ),
     );
@@ -121,71 +121,4 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
     });
   }
 
-}
-
-
-
-class MediaVideoPlayer extends StatefulWidget {
-  final Media media;
-
-  const MediaVideoPlayer({
-    @required this.media,
-  });
-
-  @override
-  _MediaVideoPlayerState createState() => _MediaVideoPlayerState();
-}
-
-class _MediaVideoPlayerState extends State<MediaVideoPlayer> {
-  VideoPlayerController _controller;
-  File _file;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      initAsync();
-    });
-    super.initState();
-  }
-
-  Future<void> initAsync() async {
-    try {
-      _file = await widget.media.getFile();
-      _controller = VideoPlayerController.file(_file)
-        ..initialize().then((_) {
-          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-          setState(() {});
-        });
-    } catch (e) {
-      print("Failed : $e");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _controller != null && _controller.value.initialized
-        ? Column(
-            children: <Widget>[
-              Expanded(
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
-                ),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    _controller.value.isPlaying
-                        ? _controller.pause()
-                        : _controller.play();
-                  });
-                },
-                child: Icon(
-                  _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-                ),
-              )
-            ],
-          )
-        : Container();
-  }
 }
