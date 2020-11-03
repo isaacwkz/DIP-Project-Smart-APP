@@ -184,7 +184,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
       final courseID = await DatabaseHelper.instance.retrieveCourses();
       //TODO: Write logic to check for current module and set the appropriate folder
       //TODO: Catch the case if there is no course registered maybe?
-      final moduleCode = courseID[0].courseId;
+      final moduleCode = courseID[1].courseId;
 
       print(moduleCode);
       //check and create the folder if it does not exist
