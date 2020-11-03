@@ -5,8 +5,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:async';
 import 'dart:typed_data';
 
-class annotateScreenEntry extends StatefulWidget {
-  annotateScreenEntry({Key key, this.title}) : super(key: key);
+class AnnotateScreenEntry extends StatefulWidget {
+  AnnotateScreenEntry({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -14,7 +14,7 @@ class annotateScreenEntry extends StatefulWidget {
   AnnotateScreen createState() =>  AnnotateScreen();
 }
 
-class AnnotateScreen extends State<annotateScreenEntry> {
+class AnnotateScreen extends State<AnnotateScreenEntry> {
   ui.Image image;
   bool isImageloaded = false;
   GlobalKey _myCanvasKey = new GlobalKey();

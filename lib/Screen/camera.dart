@@ -6,17 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:camera/camera.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/database/database.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -172,7 +169,6 @@ class _CameraScreenState extends State<CameraPageEntry> {
   }
 
   onCapture(context) async {
-    try {
       var permissionStatus = await Permission.storage.status;
       if(!permissionStatus.isGranted){
         await Permission.storage.request();
@@ -188,39 +184,48 @@ class _CameraScreenState extends State<CameraPageEntry> {
       final _fileName = DateTime.now();
       String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(_fileName);
 
-      print("get courseID from database");
-      final courseID = await DatabaseHelper.instance.retrieveCourses();
-      //TODO: Write logic to check for current module and set the appropriate folder
-      //TODO: Catch the case if there is no course registered maybe?
-      final moduleCode = courseID[1].courseId;
-
-      print(moduleCode);
+      //create a string to store module
+      var moduleCode = "null";
+      try {
+        //TODO: Write logic to check for current module and set the appropriate folder
+        print("get courseID from database");
+        final courseID = await DatabaseHelper.instance.retrieveCourses();
+        final currentCourse = 0;
+        moduleCode = courseID[currentCourse].courseId;
+      } catch (e) { //catch error in the event user did not create a course ID in the database yet
+        print("Failed... Writing to unsorted folder");
+        moduleCode = "Unsorted";
+      }
       //check and create the folder if it does not exist
-      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '${moduleCode}'));
+      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '$moduleCode'));
       print('Check whether directory exists: $tempDirectory');
       if(await tempDirectory.exists()){
         print('Path exists');
       } else {
         print('Path does not exist, creating path');
         //TODO: Create an exception catcher maybe? LEL
-        await tempDirectory.create(recursive: true);
-        print('Path created');
-        //or isit?
+        try {
+          await tempDirectory.create(recursive: true);
+          print('Path created');
+        } catch (e) {
+          print("CAMERA: cannot create file path\n....die alr");
+          print("here's a bunch of error code: $e");
+        }
       }
-
       //smash everything together and pass full path into cameraController
-      final path = "${photoDir.path}/${moduleCode}/$fileName.png";
+      final path = "${photoDir.path}/$moduleCode/$fileName.png";
       print("full file path: $path");
-      await cameraController.takePicture(path).then((value){
-        print('Saving Photo to');
-        print(path);
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
-      });
-
-    } catch (e) {
-      print('CAMERA EXCEPTION!');
-      showCameraException(e);
-    }
+      try{
+        await cameraController.takePicture(path).then((value){
+          print('Saving Photo to');
+          print(path);
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
+        });
+      }
+      catch (e) {
+        print('CAMERA EXCEPTION!');
+        showCameraException(e);
+      }
   }
 
   @override

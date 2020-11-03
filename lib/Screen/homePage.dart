@@ -329,6 +329,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async {
                               //Navigator.pushNamed(context, "gallery");
                                 final result = await MediaPicker.show(context);
+                                print("HOMEPAGE: ${result.selectedMedias}");
                                 if (result != null) {
                                   Navigator.push(context, MaterialPageRoute(
                                       builder: (context) =>

@@ -19,7 +19,7 @@ class MediaViewerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(media.id),
+        title: Text("Course Notes"),
       ),
       body: media.mediaType == MediaType.image
           ? MediaImagePlayer(
@@ -85,20 +85,23 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
             ),
           ),
         ),
-        FloatingActionButton(
+        FloatingActionButton.extended(
           onPressed:() {
             getimageditor();
           },
-          child: Icon(Icons.edit),
+          label: Text('Edit Photo'),
+          icon: Icon(Icons.edit),
           backgroundColor: Colors.white,
         ),
-
-        /*SizedBox(
-          height: 200,
-          child: SingleChildScrollView(
-            child: Text("$exif"),
+        SizedBox(
+          height: 5,
+          child: Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 5),
+              child: Text("Course Notes"),
+            ),
           ),
-        )*/
+        )
       ],
     );
   }
