@@ -19,7 +19,7 @@ class MediaViewerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Course Notes"),
+        title: Text(media.id),
       ),
       body: media.mediaType == MediaType.image
           ? MediaImagePlayer(
@@ -32,10 +32,8 @@ class MediaViewerPage extends StatelessWidget {
   }
 }
 
-
 class MediaImagePlayer extends StatefulWidget {
   final Media media;
-
 
   const MediaImagePlayer({
     @required this.media,
@@ -69,13 +67,12 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
     }
   }
 
-
   //This widget show the selected media in full size
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+      children: <Widget>[
         Expanded(
           child: FadeInImage(
             fit: BoxFit.cover,
@@ -88,17 +85,20 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
         Row(
           children: <Widget>[
             FloatingActionButton.extended(
-                onPressed:() {
-                  getimageditor();
-                },
-                label: Text('Edit Photo'),
-                icon: Icon(Icons.edit),
-                backgroundColor: Colors.white,
-              ),
+              onPressed: () {
+                getimageditor();
+              },
+              label: Text('Edit Photo'),
+              icon: Icon(Icons.edit),
+              backgroundColor: Colors.white,
+            ),
             Expanded(
               child: Container(
                 //padding: EdgeInsets.symmetric(vertical: 5),
-                child: Text("Course Notes", textAlign: TextAlign.center,),
+                child: Text(
+                  "Course Notes",
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
@@ -109,8 +109,8 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
 
   Future<void> getimageditor() {
     //returns edited file
-    final geteditimage = Navigator.push(
-        context, MaterialPageRoute(builder: (context) {
+    final geteditimage =
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ImageEditorPro(
         appBarColor: Colors.blue,
         bottomBarColor: Colors.blue,
@@ -126,5 +126,4 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
       print(er);
     });
   }
-
 }

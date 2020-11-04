@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/Screen/calendarPage.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/collections.dart';
+import 'package:dip_taskplanner/Screen/NewCalendar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -329,7 +330,6 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () async {
                               //Navigator.pushNamed(context, "gallery");
                                 final result = await MediaPicker.show(context);
-                                print("HOMEPAGE: ${result.selectedMedias}");
                                 if (result != null) {
                                   Navigator.push(context, MaterialPageRoute(
                                       builder: (context) =>
@@ -674,11 +674,11 @@ class _HomePageState extends State<HomePage> {
           onTap: (index) {
             if(index==0) {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => calendar()));
+                  MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==1) {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => calendar()));
+                  MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==2) {
               Navigator.push(context,

@@ -5,6 +5,8 @@ import 'package:media_gallery/media_gallery.dart';
 import 'albums.dart';
 import 'selection.dart';
 import 'validate.dart';
+import 'medias.dart';
+import 'thumbnail.dart';
 
 class MediaCollectionsPage extends StatefulWidget {
   @override

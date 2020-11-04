@@ -31,8 +31,7 @@ class _MediaImagesPageState extends State<MediasPage> {
           title: Text(widget.collection.name),
           actions: <Widget>[
             PickerValidateButton(
-              onValidate:
-                    (selection) => Navigator.pop(context, selection),
+              onValidate: (selection) => Navigator.pop(context, selection),
             ),
           ],
           bottom: selection.mediaTypes.length > 1
