@@ -9,7 +9,7 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:dip_taskplanner/Screen/gallery2.dart';
+import 'package:dip_taskplanner/Screen/gallery.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/media.dart';
