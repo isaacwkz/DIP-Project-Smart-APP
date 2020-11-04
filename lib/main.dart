@@ -8,6 +8,7 @@ import 'package:dip_taskplanner/Screen/homePage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
 import 'package:dip_taskplanner/Screen/gallery2.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
+import 'package:dip_taskplanner/Screen/NewCalendar.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes:{
         "home":(context) => HomePage(),
         "loading":(context) => LoadingPage(),
-        "calendar":(context) => calendar(),
+        "calendar":(context) => NewCal(),
         "camera":(context) => CameraPageEntry(),
         "gallery":(context) => GalleryPageEntry(),
         "todo":(context) => todo(),
