@@ -117,9 +117,11 @@ class _CameraScreenState extends State<CameraPageEntry> {
                 ),
                 backgroundColor: Colors.white,
                 onPressed: () async {
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
+
                   final result = await MediaPicker.show(context);
                   if (result != null) {
+                    print("pushing image viewer route");
                     Navigator.push(context, MaterialPageRoute(
                         builder: (context) =>
                             MediaViewerPage(media: result.
@@ -396,9 +398,11 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           ),
                           backgroundColor: Colors.white,
                           onPressed: () async {
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                             final result = await MediaPicker.show(context);
+                            print(result);
                             if (result != null) {
+                              print("pushing Image Viewer route");
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (context) =>
                                       MediaViewerPage(media: result.

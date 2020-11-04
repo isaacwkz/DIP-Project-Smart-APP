@@ -75,7 +75,7 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
+        children: <Widget>[
         Expanded(
           child: FadeInImage(
             fit: BoxFit.cover,
@@ -85,34 +85,37 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
             ),
           ),
         ),
-        FloatingActionButton.extended(
-          onPressed:() {
-            getimageditor();
-          },
-          label: Text('Edit Photo'),
-          icon: Icon(Icons.edit),
-          backgroundColor: Colors.white,
-        ),
-        SizedBox(
-          height: 5,
-          child: Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5),
-              child: Text("Course Notes"),
+        Row(
+          children: <Widget>[
+            FloatingActionButton.extended(
+                onPressed:() {
+                  getimageditor();
+                },
+                label: Text('Edit Photo'),
+                icon: Icon(Icons.edit),
+                backgroundColor: Colors.white,
+              ),
+            Expanded(
+              child: Container(
+                //padding: EdgeInsets.symmetric(vertical: 5),
+                child: Text("Course Notes", textAlign: TextAlign.center,),
+              ),
             ),
-          ),
-        )
+          ],
+        ),
       ],
     );
   }
 
   Future<void> getimageditor() {
+    //returns edited file
     final geteditimage = Navigator.push(
         context, MaterialPageRoute(builder: (context) {
       return ImageEditorPro(
         appBarColor: Colors.blue,
         bottomBarColor: Colors.blue,
       );
+      //then set _image to the edited image returned from above function call
     })).then((geteditimage) {
       if (geteditimage != null) {
         setState(() {
