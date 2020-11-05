@@ -5,8 +5,6 @@ import 'package:media_gallery/media_gallery.dart';
 import 'albums.dart';
 import 'selection.dart';
 import 'validate.dart';
-import 'medias.dart';
-import 'thumbnail.dart';
 
 class MediaCollectionsPage extends StatefulWidget {
   @override
@@ -40,10 +38,10 @@ class _MediaCollectionsPageState extends State<MediaCollectionsPage> {
   Widget build(BuildContext context) {
     final selection = MediaPickerSelection.of(context);
     final labels = MediaPickerLabels.of(context);
-    final allCollection = collections.firstWhere(
+    /*final allCollection = collections.firstWhere(
       (c) => c.isAllCollection,
       orElse: () => null,
-    );
+    );*/
     return DefaultTabController(
       //length: selection.mediaTypes.length + 1,
       length: selection.mediaTypes.length,

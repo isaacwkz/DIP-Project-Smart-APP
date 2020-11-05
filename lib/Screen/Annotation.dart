@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,6 @@ import 'package:image_editor_pro/modules/colors_picker.dart';
 import 'package:image_editor_pro/modules/emoji.dart';
 import 'package:image_editor_pro/modules/text.dart';
 import 'package:image_editor_pro/modules/textview.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:signature/signature.dart';
 

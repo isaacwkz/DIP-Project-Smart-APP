@@ -109,7 +109,6 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
   }
 
   Future<void> getimageditor(File _imageToEdit) {
-    final geteditimage =
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ImageEditorPro(
             editdis: File("${_imageToEdit.path}"),

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/selection.dart';
@@ -8,9 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 
 
 // Entry point into the gallery

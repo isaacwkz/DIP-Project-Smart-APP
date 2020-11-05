@@ -1,18 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:camera/camera.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
-import 'dart:typed_data';
-import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:path_provider_ex/path_provider_ex.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CropScreenArguments {
   final String filePath;
