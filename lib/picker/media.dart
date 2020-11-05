@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:media_gallery/media_gallery.dart';
 import 'package:transparent_image/transparent_image.dart';
-//import 'package:video_player/video_player.dart';
-import 'package:image_editor_pro/image_editor_pro.dart';
+import 'package:dip_taskplanner/Screen/Annotation.dart';
+//import 'package:path/path.dart';
 
 class MediaViewerPage extends StatelessWidget {
   final Media media;
@@ -69,7 +69,7 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
 
   //This widget show the selected media in full size
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -86,7 +86,8 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
           children: <Widget>[
             FloatingActionButton.extended(
               onPressed: () {
-                getimageditor();
+                print("sending ${this.file.path} into photo editor");
+                getimageditor(File("${this.file.path}"));
               },
               label: Text('Edit Photo'),
               icon: Icon(Icons.edit),
@@ -107,23 +108,23 @@ class _MediaImagePlayerState extends State<MediaImagePlayer> {
     );
   }
 
-  Future<void> getimageditor() {
-    //returns edited file
+  Future<void> getimageditor(File _imageToEdit) {
     final geteditimage =
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ImageEditorPro(
-        appBarColor: Colors.blue,
-        bottomBarColor: Colors.blue,
-      );
-      //then set _image to the edited image returned from above function call
-    })).then((geteditimage) {
-      if (geteditimage != null) {
-        setState(() {
-          _image = geteditimage;
+          return ImageEditorPro(
+            editdis: File("${_imageToEdit.path}"),
+            appBarColor: Colors.blue,
+            bottomBarColor: Colors.blue,
+          );
+        //then set _image to the edited image returned from above function call
+        })).then((geteditimage) {
+          if (geteditimage != null) {
+            setState(() {
+              _image = geteditimage;
+            }   );
+          }
+        }).catchError((er) {
+          print(er);
         });
-      }
-    }).catchError((er) {
-      print(er);
-    });
   }
 }
