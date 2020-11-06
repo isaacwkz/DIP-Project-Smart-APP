@@ -12,6 +12,7 @@ import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/database/database.dart';
+import 'package:dip_taskplanner/database/model/Courses.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -171,55 +172,79 @@ class _CameraScreenState extends State<CameraPageEntry> {
   }
 
   onCapture(context) async {
+    var permissionStatus = await Permission.storage.status;
+    if(!permissionStatus.isGranted){
+      await Permission.storage.request();
+    }
+
+    //Get the absolute path to the emulated storage space
+    //should be something along the lines of /storage/emulated/0/
+    //actual path depends on manufacturer implementation - hence the use of path_provider
+    print("getting directory:");
+    final storageInfo = await PathProviderEx.getStorageInfo();
+    //store files to /sdcard/dip_taskplanner/
+    final Directory photoDir = Directory(p.join('${storageInfo[0].rootDir}', 'dip_taskplanner'));
+    print(photoDir.path);
+    //DateTime is used to set filename
+    //NOTE: colons ":" are not allowed in filenames
+    final currentDateAndTime = DateTime.now();
+    String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(currentDateAndTime);
+
+    String moduleCode;
+    print("Today is a ${DateFormat('EEE').format(currentDateAndTime).toUpperCase()}");
+
+    //Attempt to get course details from DB
     try {
-      var permissionStatus = await Permission.storage.status;
-      if(!permissionStatus.isGranted){
-        await Permission.storage.request();
+      print("get courseID from database");
+      final courseID = await DatabaseHelper.instance.retrieveCourses();
+      //Logic to get current CourseID
+      //Iterate through List<Courses> courseID
+      for(int i = 0; courseID[i] != null ; i++) {
+        //Attempt to PARTIAL match day of week to current day
+        if (courseID[i].weekDay.toUpperCase().contains(
+            '${DateFormat('EEE').format(currentDateAndTime).toUpperCase()}')) {
+          //There is a match
+          //Set moduleCode
+          moduleCode = courseID[i].courseId.toUpperCase();
+          //break out of for loop
+          break;
+        } else {
+          moduleCode = "Unsorted";
+        }
       }
+    } catch(e){
+      //This catches the case when either
+      //1) DB is unable to retrieve course details
+      //   This happens when user did not enter course details
+      //2) The above code is unable to get a match for current day of the week
+      print("CAMERA: CourseID error: $e");
+      //Hence, we set moduleCode as "Unsorted"
+      moduleCode = "Unsorted";
+    }
 
-      print("get directory");
-      //final photoDir = await getExternalStorageDirectory();
-      //final photoDir = await getApplicationDocumentsDirectory();
-      //final photoDir = await getApplicationDocumentsDirectory();
-      final storageInfo = await PathProviderEx.getStorageInfo();
-      final Directory photoDir = Directory(p.join('${storageInfo[0].rootDir}', 'dip_taskplanner'));
-      print(photoDir.path);
-      final _fileName = DateTime.now();
-      String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(_fileName);
+    print(moduleCode);
+    //check and create the folder if it does not exist
+    final Directory tempDirectory = Directory(p.join('${photoDir.path}', '$moduleCode'));
+    print('Check whether directory exists: $tempDirectory');
+    if(await tempDirectory.exists()){
+      print('Path exists');
+    } else {
+      print('Path does not exist, creating path');
+      //TODO: Create an exception catcher maybe? LEL
+      await tempDirectory.create(recursive: true);
+      print('Path created');
+      //or isit?
+    }
 
-      String moduleCode = "Unsorted";
-      try {
-        print("get courseID from database");
-        final courseID = await DatabaseHelper.instance.retrieveCourses();
-        //TODO: Write logic to check for current module and set the appropriate folder
-        moduleCode = courseID[1].courseId;
-      } catch(e){
-        print("CAMERA: CourseID error: $e");
-        moduleCode = "Unsorted";
-      }
-      print(moduleCode);
-      //check and create the folder if it does not exist
-      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '$moduleCode'));
-      print('Check whether directory exists: $tempDirectory');
-      if(await tempDirectory.exists()){
-        print('Path exists');
-      } else {
-        print('Path does not exist, creating path');
-        //TODO: Create an exception catcher maybe? LEL
-        await tempDirectory.create(recursive: true);
-        print('Path created');
-        //or isit?
-      }
-
-      //smash everything together and pass full path into cameraController
-      final path = "${photoDir.path}/$moduleCode/$fileName.png";
-      print("full file path: $path");
+    //smash everything together and pass full path into cameraController
+    final path = "${photoDir.path}/$moduleCode/$fileName.png";
+    print("full file path: $path");
+    try{
       await cameraController.takePicture(path).then((value){
         print('Saving Photo to');
         print(path);
         Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
       });
-
     } catch (e) {
       print('CAMERA EXCEPTION!');
       showCameraException(e);
