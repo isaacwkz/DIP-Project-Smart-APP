@@ -6,17 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:camera/camera.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 import 'dart:typed_data';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-import 'package:dip_taskplanner/Screen/gallery.dart';
 import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/database/database.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -104,7 +101,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
       ),
     );
   }
-  Widget GalleryWidget(context) {
+  Widget galleryWidget(context) {
     return Expanded(
         child: Align(
           alignment: Alignment.centerRight,
@@ -190,15 +187,19 @@ class _CameraScreenState extends State<CameraPageEntry> {
       final _fileName = DateTime.now();
       String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(_fileName);
 
-      print("get courseID from database");
-      final courseID = await DatabaseHelper.instance.retrieveCourses();
-      //TODO: Write logic to check for current module and set the appropriate folder
-      //TODO: Catch the case if there is no course registered maybe?
-      final moduleCode = courseID[1].courseId;
-
+      String moduleCode = "Unsorted";
+      try {
+        print("get courseID from database");
+        final courseID = await DatabaseHelper.instance.retrieveCourses();
+        //TODO: Write logic to check for current module and set the appropriate folder
+        moduleCode = courseID[1].courseId;
+      } catch(e){
+        print("CAMERA: CourseID error: $e");
+        moduleCode = "Unsorted";
+      }
       print(moduleCode);
       //check and create the folder if it does not exist
-      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '${moduleCode}'));
+      final Directory tempDirectory = Directory(p.join('${photoDir.path}', '$moduleCode'));
       print('Check whether directory exists: $tempDirectory');
       if(await tempDirectory.exists()){
         print('Path exists');
@@ -211,7 +212,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
       }
 
       //smash everything together and pass full path into cameraController
-      final path = "${photoDir.path}/${moduleCode}/$fileName.png";
+      final path = "${photoDir.path}/$moduleCode/$fileName.png";
       print("full file path: $path");
       await cameraController.takePicture(path).then((value){
         print('Saving Photo to');
@@ -278,7 +279,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
                     cameraToggle(),
                     cameraControl(context),
                     //Spacer(),
-                    GalleryWidget(context),
+                    galleryWidget(context),
                   ],
                 ),
               ),
