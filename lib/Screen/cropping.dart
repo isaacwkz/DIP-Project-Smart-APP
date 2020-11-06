@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CropScreenArguments {
   final String filePath;
@@ -49,6 +50,15 @@ class _CroppingState extends State<CroppingPageEntry> {
     if (croppedFile != null) {
       imageFile = croppedFile;
       await imageFile.copy('$imageFilePath');
+      Fluttertoast.showToast(
+          msg: "Saving cropped image",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black45,
+          fontSize: 16.0
+      );
     }
   }
 

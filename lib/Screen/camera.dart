@@ -12,9 +12,9 @@ import 'package:dip_taskplanner/Screen/cropping.dart';
 import 'package:dip_taskplanner/picker/picker.dart';
 import 'package:dip_taskplanner/picker/media.dart';
 import 'package:dip_taskplanner/database/database.dart';
-import 'package:dip_taskplanner/database/model/Courses.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 //Entry point into Camera
 class CameraPageEntry extends StatefulWidget {
@@ -240,6 +240,15 @@ class _CameraScreenState extends State<CameraPageEntry> {
     final path = "${photoDir.path}/$moduleCode/$fileName.png";
     print("full file path: $path");
     try{
+      Fluttertoast.showToast(
+          msg: "Saving photo to folder $moduleCode",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.white,
+          textColor: Colors.black45,
+          fontSize: 16.0
+      );
       await cameraController.takePicture(path).then((value){
         print('Saving Photo to');
         print(path);
