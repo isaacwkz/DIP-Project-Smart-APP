@@ -36,6 +36,8 @@ dependencies:
   shared_preferences: ^0.5.4+5
   unicorndial:
 
+  # Generic dependencies
+  fluttertoast: ^7.1.1
   # Dependencies for camera
   camera: ^0.5.8+11
   path: ^1.7.0
