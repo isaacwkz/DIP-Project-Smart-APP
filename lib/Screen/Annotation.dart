@@ -115,6 +115,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
         key: scaf,
         appBar: new AppBar(
           actions: <Widget>[
+            /*
             new IconButton(
                 icon: Icon(FontAwesomeIcons.boxes),
                 onPressed: () {
@@ -176,17 +177,22 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         );
                       });
                 }),
+                */
+            /*
             new IconButton(
                 icon: Icon(Icons.clear),
                 onPressed: () {
                   _controller.points.clear();
                   setState(() {});
                 }),
-            /*new IconButton(
+                */
+            /*
+            new IconButton(
                 icon: Icon(Icons.camera),
                 onPressed: () {
                   bottomsheets();
-                }),*/
+                }),
+                */
             new FlatButton(
                 child: new Text("Done"),
                 textColor: Colors.white,
@@ -382,37 +388,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 },
                 title: 'Eraser',
               ),
-              BottomBarContainer(
-                icons: Icons.photo,
-                ontap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return ColorPiskersSlider();
-                      });
-                },
-                title: 'Filter',
-              ),
-              BottomBarContainer(
-                icons: FontAwesomeIcons.smile,
-                ontap: () {
-                  Future getemojis = showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Emojies();
-                      });
-                  getemojis.then((value) {
-                    if (value != null) {
-                      type.add(1);
-                      fontsize.add(20);
-                      offsets.add(Offset.zero);
-                      multiwidget.add(value);
-                      howmuchwidgetis++;
-                    }
-                  });
-                },
-                title: 'Emoji',
-              ),
+
             ],
           ),
         ));
