@@ -12,6 +12,7 @@ import 'package:image_editor_pro/modules/text.dart';
 import 'package:image_editor_pro/modules/textview.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:signature/signature.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 TextEditingController heightcontroler = TextEditingController();
 TextEditingController widthcontroler = TextEditingController();
@@ -210,6 +211,15 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                     paths = paths + "edited.png";
                     print(paths);
                     await image.copy('$paths');
+                    Fluttertoast.showToast(
+                        msg: "Saving edited image",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.white,
+                        textColor: Colors.black45,
+                        fontSize: 16.0
+                    );
                     Navigator.pop(context, image);
                   }).catchError((onError) {
                     print(onError);
