@@ -20,7 +20,13 @@ class _StudyPageState extends State<StudyPageEntry> {
   @override
   Widget build(BuildContext context) {
 
-    return Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Study Mode'),
+      ),
+
+      body: Center(
+      child:Column(
       children: <Widget>[
         Container(
           width: 300,
@@ -137,6 +143,8 @@ class _StudyPageState extends State<StudyPageEntry> {
           ),
         ),
       ],
+    ),
+    ),
     );
   }
  }

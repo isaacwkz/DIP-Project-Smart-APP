@@ -55,7 +55,7 @@ class _StudyModeState extends State<StudyMode> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('study mode'),
+          title: const Text('DO NOT DISTURB'),
         ),
 
         body: Center(
