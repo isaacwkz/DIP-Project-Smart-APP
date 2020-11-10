@@ -48,7 +48,7 @@ class _CreateCoursesState extends State<DetailcourseScreen> {
             padding: const EdgeInsets.all(12.0),
             child: TextField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: "weekDay"),
+                  border: OutlineInputBorder(), labelText: "weekDay (Mon,Tue,Wed,Thu,Fri)"),
               maxLines: 1,
               controller: weekDayTextController,
             ),

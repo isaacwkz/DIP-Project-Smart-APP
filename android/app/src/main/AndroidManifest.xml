@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Task Planner"
+        android:label="Student Managemnet"
         android:icon="@mipmap/taskplannerlogo">
         <activity
             android:name=".MainActivity"
