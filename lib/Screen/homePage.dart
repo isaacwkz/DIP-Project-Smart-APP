@@ -1,6 +1,6 @@
 
+import 'package:dip_taskplanner/Screen/StudyPage.dart';
 import 'package:dip_taskplanner/Screen/camera.dart';
-import 'package:dip_taskplanner/Screen/loadingPage.dart';
 import 'package:dip_taskplanner/Screen/todo.dart';
 import 'package:dip_taskplanner/components/quad_clipper.dart';
 import 'package:dip_taskplanner/picker/media.dart';
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "NTU Student Management Application",
+                                "Student Management APP for SMART-APP Project",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500),
@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
               primary: Colors.white,
               chipColor: LightColor.darkBlue,
               backWidget: _decorationContainerB(Colors.white, 90, -40),
-              chipText1: "Load your course timetable to calendar",
+              chipText1: "Store your course timetable to calendar",
               chipText2: "CALENDAR",
               imgPath: 'lib/Assets/calendar.png',
             ),
@@ -673,11 +673,11 @@ class _HomePageState extends State<HomePage> {
           ],
           onTap: (index) {
             if(index==0) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==1) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==2) {
@@ -686,8 +686,8 @@ class _HomePageState extends State<HomePage> {
             }
             else
             {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoadingPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => StudyPageEntry()));
             }
             },
         ),

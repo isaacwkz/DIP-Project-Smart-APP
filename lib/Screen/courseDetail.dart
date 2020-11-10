@@ -48,7 +48,7 @@ class _CreateCoursesState extends State<DetailcourseScreen> {
             padding: const EdgeInsets.all(12.0),
             child: TextField(
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: "weekDay"),
+                  border: OutlineInputBorder(), labelText: "weekDay (Mon,Tue,Wed,Thu,Fri)"),
               maxLines: 1,
               controller: weekDayTextController,
             ),
@@ -113,16 +113,13 @@ class _CreateCoursesState extends State<DetailcourseScreen> {
           courseTime: courseTimeTextController.text,
           courseType: courseTypeTextController.text,
       ));
-      //print(weekDayTextController.text);
-      //print(courseVenue);
-      //Navigator.pop(context, "Your course has been saved.");
       Navigator.pushNamed(context, "calendar");
       print('insert testing');
       print(course);
     }
     else {
       await DatabaseHelper.instance
-          .updateCourse(Courses(id: course.id, weekDay: course.weekDay, courseId: course.courseId,courseVenue: course.courseVenue,courseTime: course.courseTime,courseType: course.courseType));
+          .updateCourse(Courses(id: course.id, weekDay: weekDay, courseId: courseId,courseVenue: courseVenue,courseTime: courseTime,courseType: courseType));
       //Navigator.pop(context);
       Navigator.pushNamed(context, "calendar");
       print('update testing');

@@ -19,29 +19,26 @@ class _StudyPageState extends State<StudyPageEntry> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Study Mode'),
-      ),
-
-      body: Center(
-      child:Column(
-      children: <Widget>[
-        Container(
-          width: 300,
-          height: 250,
-          color: Colors.black,
-          child: Image.asset("lib/Assets/music.jpg"),
+       appBar: AppBar(
+          title: Text('Study Page'),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          child: new Row(
-            children: <Widget>[
-              new Expanded(
-                child: FlatButton(
-                  shape: new RoundedRectangleBorder(
+       body: Column(
+          children: <Widget>[
+          Container(
+            width: 300,
+            height: 250,
+            color: Colors.black,
+            child: Image.asset("lib/Assets/music.jpg"),
+        ),
+          Container(
+            margin: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            child: new Row(
+              children: <Widget>[
+                new Expanded(
+                 child: FlatButton(
+                      shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0)),
                   splashColor: buttonColor1,
                   color: buttonColor1,
@@ -69,7 +66,10 @@ class _StudyPageState extends State<StudyPageEntry> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () => {},
+                            onPressed: () => {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => MusicPLayer()),)
+                            },
                           ),
                         ),
                       )
@@ -85,13 +85,13 @@ class _StudyPageState extends State<StudyPageEntry> {
             ],
           ),
         ),
-        Container(
+          Container(
           width: 300,
           height: 250,
           color: Colors.black,
           child: Image.asset("lib/Assets/study_pic.jpg"),
         ),
-        Container(
+          Container(
           margin: const EdgeInsets.only(top: 20.0),
           padding: const EdgeInsets.only(left: 20.0, right: 20.0),
           child: new Row(
@@ -143,7 +143,6 @@ class _StudyPageState extends State<StudyPageEntry> {
           ),
         ),
       ],
-    ),
     ),
     );
   }

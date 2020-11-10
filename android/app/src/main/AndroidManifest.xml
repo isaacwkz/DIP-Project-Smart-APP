@@ -12,8 +12,10 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Task Planner"
-        android:icon="@mipmap/taskplannerlogo">
+        android:label="Student Managemnet"
+        android:icon="@mipmap/taskplannerlogo"
+        android:allowBackup="true">
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
