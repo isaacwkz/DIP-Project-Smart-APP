@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:dip_taskplanner/database/model/music.dart';
-import 'package:audioplayer2/audioplayer2.dart';
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/src/widgets/text.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -21,7 +21,7 @@ class _MusicPlayerState extends State<MusicPLayer> {
 
   List<Music> playlist = [
     new Music('Dreams', 'Dreams Team', 'lib/Assets/img/un.jpg', 'https://www.bensound.com/royalty-free-music?download=dreams'),
-    new Music('Endless Motion', 'NaN', 'lib/Assets/img/deux.jpg', 'https://www.youtube.com/watch?v=jXZAbnn1kTU&ab_channel=QuietQuest-StudyMusic'),
+    new Music('Memories', 'NaN', 'lib/Assets/img/memories.jpg', 'https://www.bensound.com/royalty-free-music?download=memories'),
   ];
 
   Music playlistNow;
