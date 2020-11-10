@@ -673,11 +673,11 @@ class _HomePageState extends State<HomePage> {
           ],
           onTap: (index) {
             if(index==0) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==1) {
-              Navigator.pushReplacement(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => NewCal()));
             }
             else if(index==2) {
