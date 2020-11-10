@@ -78,7 +78,6 @@ class _CreateTodoState extends State<DetailTodoScreen> {
       DatabaseHelper.instance.insertTodo(Todo(
           title: titleTextController.text,
           content: descriptionTextController.text));
-      //Navigator.pop(context, "Your todo has been saved.");
       Navigator.pushNamed(context, "home");
       print('insert testing');
       print(todo);

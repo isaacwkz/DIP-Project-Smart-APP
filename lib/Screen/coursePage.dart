@@ -22,7 +22,6 @@ class _courseState extends State<course> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
