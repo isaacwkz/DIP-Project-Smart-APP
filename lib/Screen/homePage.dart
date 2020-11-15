@@ -137,7 +137,7 @@ class _HomePageState extends State<HomePage> {
               backWidget:
               _decorationContainerA(LightColor.lightOrange, 50, -30),
               chipColor: LightColor.orange,
-              chipText1: "This application helps you have better time management",
+              chipText1: "This APP helps you have better time management",
               chipText2: "HOME PAGE",
               isPrimaryCard: true,
               imgPath: 'lib/Assets/ntu.png',

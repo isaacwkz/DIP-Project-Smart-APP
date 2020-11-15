@@ -126,7 +126,10 @@ class _StudyPageState extends State<StudyPageEntry> {
                             child: Icon(
                               Icons.arrow_forward,
                             ),
-                            onPressed: () =>  { },
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => StudyMode()),);
+                            },
                           ),
                         ),
                       )
