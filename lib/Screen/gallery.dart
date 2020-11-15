@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-
 // Entry point into the gallery
 class GalleryPageEntry extends StatefulWidget {
   @override

@@ -188,7 +188,7 @@ class _CameraScreenState extends State<CameraPageEntry> {
     //DateTime is used to set filename
     //NOTE: colons ":" are not allowed in filenames
     final currentDateAndTime = DateTime.now();
-    String fileName = DateFormat('yyyy-MM-dd – kk-mm-ss-SSS').format(currentDateAndTime);
+    String fileName = DateFormat('yyyyMMdd–kkmmss').format(currentDateAndTime);
 
     String moduleCode;
     print("Today is a ${DateFormat('EEE').format(currentDateAndTime).toUpperCase()}");
@@ -240,8 +240,23 @@ class _CameraScreenState extends State<CameraPageEntry> {
     final path = "${photoDir.path}/$moduleCode/$fileName.png";
     print("full file path: $path");
     try{
+      await cameraController.takePicture(path).then((value){
+        print('Saving Photo to');
+        print(path);
+        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
+        Fluttertoast.showToast(
+            msg: "Saving photo to folder $moduleCode",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            textColor: Colors.black45,
+            fontSize: 16.0
+        );
+      });
+    } catch (e) {
       Fluttertoast.showToast(
-          msg: "Saving photo to folder $moduleCode",
+          msg: "Saving photo failed",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -249,12 +264,6 @@ class _CameraScreenState extends State<CameraPageEntry> {
           textColor: Colors.black45,
           fontSize: 16.0
       );
-      await cameraController.takePicture(path).then((value){
-        print('Saving Photo to');
-        print(path);
-        Navigator.push(context, MaterialPageRoute(builder: (context) =>PreviewScreen(imgPath: path,fileName: "$fileName.png",)));
-      });
-    } catch (e) {
       print('CAMERA EXCEPTION!');
       showCameraException(e);
     }
